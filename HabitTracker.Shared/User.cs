@@ -1,6 +1,8 @@
-﻿namespace HabitTracker.Shared
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace HabitTracker.Shared
 {
-    public class User
+    public class User : IdentityUser
     {
 
     }
