@@ -1,0 +1,30 @@
+﻿body {
+}
+
+img {
+    filter: invert(97%) sepia(88%) saturate(0%) hue-rotate(139deg) brightness(107%) contrast(101%);
+    height: 35px;
+}
+
+button {
+    background-color: #000000;
+    border: 0;
+}
+
+.navigation {
+    background-color: #000000;
+    width: 90vw;
+    height: 70px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.choise {
+    position: absolute;
+    background-color: #FFFFFF;
+    height: 55px;
+    width: 55px;
+    border-radius: 50px;
+}
