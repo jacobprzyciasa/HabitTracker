@@ -2,7 +2,7 @@
 
 namespace HabitTracker.Shared
 {
-    public class User : IdentityUser
+    public class User : IdentityUser<int>
     {
 
     }

@@ -24,4 +24,8 @@
     <ProjectReference Include="..\HabitTracker.Shared\HabitTracker.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>

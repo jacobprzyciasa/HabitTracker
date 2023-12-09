@@ -1,4 +1,8 @@
 using HabitTracker.Api;
+using HabitTracker.Api.Repositories.HabitListRepositories;
+using HabitTracker.Api.Repositories.HabitRepositories;
+using HabitTracker.Api.Repositories.HabitRepsitories;
+using HabitTracker.Api.Repositories.UserRepositories;
 using HabitTracker.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +31,12 @@ builder.Services.AddIdentity<User, IdentityRole>(o =>
 })
 .AddEntityFrameworkStores<AppDbContext>()
 .AddDefaultTokenProviders();
+
+
+//Repositiories
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IHabitRepository, HabitRepository>();
+builder.Services.AddScoped<IHabitListRepository, HabitListRepository>();
 
 
 

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HabitTracker.Api
 {
-    public class AppDbContext : IdentityDbContext<User>
+    public class AppDbContext : IdentityDbContext<User, Role, int>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -25,9 +25,9 @@ namespace HabitTracker.Api
         }
 
 
-        DbSet<User> Users {  get; set; }
-        DbSet<HabitList> HabitLists { get; set; }
-        DbSet<Habit> Habits { get; set; }
+        public DbSet<User> Users {  get; set; }
+        public DbSet<HabitList> HabitLists { get; set; }
+        public DbSet<Habit> Habits { get; set; }
 
 
 
