@@ -1,50 +1,61 @@
-﻿<div>
+﻿<div class="calendar-div">
     <ul>
         <li>
             <p>MON</p>
             <div>
                 <p>1</p>
             </div>
+            <div class="current-day-indycator"></div>
         </li>
         <li>
             <p>TUE</p>
             <div>
                 <p>1</p>
             </div>
+            <div class="current-day-indycator"></div>
         </li>
         <li>
             <p>WED</p>
             <div>
                 <p>1</p>
             </div>
+            <div class="current-day-indycator"></div>
         </li>
         <li>
             <p>THU</p>
             <div>
                 <p>1</p>
             </div>
+            <div class="current-day-indycator"></div>
         </li>
         <li>
             <p>FRI</p>
             <div>
                 <p>1</p>
             </div>
+            <div class="current-day-indycator @zmienna2"></div>
         </li>
         <li>
             <p>SAT</p>
             <div>
                 <p>1</p>
             </div>
+            <div class="current-day-indycator @zmienna1"></div>
         </li>
-        <li>
+        <li @onclick="ClickEvent">
             <p>SUN</p>
             <div>
                 <p>1</p>
             </div>
+            <div class="current-day-indycator @zmienna"></div>
         </li>
     </ul>
 </div>
 
 @code {
 
+    private void ClickEvent()
+    {
+        Console.WriteLine("My debug output.");
+    }
 }
