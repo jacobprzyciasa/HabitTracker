@@ -2,48 +2,38 @@
 }
 
 img {
-    filter: invert(97%) sepia(88%) saturate(0%) hue-rotate(139deg) brightness(107%) contrast(101%);
     height: 35px;
-}
-
-.active {
-    filter: invert(0%) sepia(1%) saturate(7500%) hue-rotate(355deg) brightness(95%) contrast(99%);
 }
 
 button {
-    background-color: transparent;
+    background-color: black;
+    color: #FFF;
+    font-weight: 300;
     border: 0;
-    width: 35px;
+    width: 130px;
     height: 35px;
+    border-radius: 20px;
+    font-weight: 800;
 }
 
-.navigation {
-    background-color: #000000;
-    width: 90vw;
-    height: 70px;
-    border-radius: 50px;
+.navigation{
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    height: 50px;
+    width: 100vw;
+    padding: 0 5vw;
 }
 
-a, button{
-    z-index: 10;
+ion-icon {
+    font-size: 64px;
 }
 
-.choise {
-    position: absolute;
-    background-color: #FFFFFF;
-    height: 55px;
-    width: 55px;
-    border-radius: 50%;
-    z-index: 5;
+.off img {
+    filter: invert(50%) sepia(0%) saturate(3199%) hue-rotate(162deg) brightness(103%) contrast(56%);
 }
 
-.on{
-    border: 2px solid red;
-}
-
-.off{
-    border: 0;
+.on img {
+    filter: invert(0%) sepia(8%) saturate(30%) hue-rotate(341deg) brightness(90%) contrast(107%);
 }

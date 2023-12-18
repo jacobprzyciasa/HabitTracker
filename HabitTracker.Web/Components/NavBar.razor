@@ -1,35 +1,41 @@
 ﻿<div class="navigation">
-    <NavLink href="#" @onclick="(() => Chosen(0))">
-        <img src="images/chart.svg" alt="chart" class="nav-chart @test[0]" />
+    <NavLink href="#" @onclick="(() => Chosen(0))" class="@test[0]">
+        <img src="/images/person-outline.svg" />
     </NavLink>
-    <NavLink href="#" @onclick="(() => Chosen(1))">
-        <img src="images/calendar.svg" alt="calendar" class="nav-calendar @test[1]" />
+    <NavLink href="#" @onclick="(() => Chosen(1))" class="@test[1]">
+        <img src="/images/bar-chart.svg" />
     </NavLink>
-    <button @onclick="(() => Chosen(2))">
-        <img src="images/plus.svg" alt="add" class="nav-plus active @test[2]" />
+    <NavLink href="#" @onclick="(() => Chosen(2))" class="@test[2]">
+        <img src="/images/list-outline.svg" />
+    </NavLink>
+    <button @onclick="(() => Chosen(3))" class="@test[3]">
+        @buttonText
     </button>
-    <NavLink href="#" @onclick="(() => Chosen(3))">
-        <img src="images/list.svg" alt="list" class="nav-list @test[3]" />
-    </NavLink>
-    <NavLink href="#" @onclick="(() => Chosen(4))">
-        <img src="images/circle.svg" alt="account" class="nav-account @test[4]" />
-    </NavLink>
-
-    <div class="choise"></div>
 </div>
 
 @code {
-    public string[] test = { "off", "off", "off", "off", "off", };
+    public string buttonText = "Add";
+    public string[] test = { "off", "off", "off", "off" };
 
 
     private async Task Chosen(int id)
     {
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 4; i++)
         {
             test[i] = "off";
         }
 
         test[id] = "on";
+
+        if(test[3] == "on")
+        {
+            buttonText = "Add";
+            Console.WriteLine("Tworzenie habitu");
+        }
+        else
+        {
+            buttonText = "Habits";
+        }
 
     }
 }

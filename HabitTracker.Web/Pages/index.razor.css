@@ -1,5 +1,6 @@
 ﻿body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -10,4 +11,12 @@ h1 {
     font-weight: 800;
     top: 20px;
     position: fixed;
+}
+
+div{
+    height: 400px;
+    width: 90vw;
+    background-color: #ffffff;
+    box-shadow: 10px 5px 5px black;
+    border-radius: 20px;
 }
