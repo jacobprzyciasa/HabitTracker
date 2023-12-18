@@ -1,38 +1,35 @@
 ﻿<div class="navigation">
-    <NavLink href="" @onclick="Chosen" class="@navLinks[0]"><img src="images/chart.svg" alt="chart" class="nav-chart @test[0]" /></NavLink>
-    <NavLink href="" @onclick="Chosen" class="@navLinks[1]"><img src="images/calendar.svg" alt="calendar" class="nav-calendar @test[1]" /></NavLink>
-    <button @onclick="Chosen" class="@navLinks[2]"><img src="images/plus.svg" alt="add" class="nav-plus active @test[2]" /></button>
-    <NavLink href="" @onclick="Chosen" class="@navLinks[3]"><img src="images/list.svg" alt="list" class="nav-list @test[3]" /></NavLink>
-    <NavLink href="" @onclick="Chosen" class="@navLinks[4]"><img src="images/circle.svg" alt="account" class="nav-account @test[4]" /></NavLink>
+    <NavLink href="#" @onclick="(() => Chosen(0))">
+        <img src="images/chart.svg" alt="chart" class="nav-chart @test[0]" />
+    </NavLink>
+    <NavLink href="#" @onclick="(() => Chosen(1))">
+        <img src="images/calendar.svg" alt="calendar" class="nav-calendar @test[1]" />
+    </NavLink>
+    <button @onclick="(() => Chosen(2))">
+        <img src="images/plus.svg" alt="add" class="nav-plus active @test[2]" />
+    </button>
+    <NavLink href="#" @onclick="(() => Chosen(3))">
+        <img src="images/list.svg" alt="list" class="nav-list @test[3]" />
+    </NavLink>
+    <NavLink href="#" @onclick="(() => Chosen(4))">
+        <img src="images/circle.svg" alt="account" class="nav-account @test[4]" />
+    </NavLink>
 
     <div class="choise"></div>
 </div>
 
 @code {
-    public string isActive = "off";
-    public int[] navLinks = { 1, 2, 3, 4, 5 };
     public string[] test = { "off", "off", "off", "off", "off", };
 
 
-    private async Task Chosen()
+    private async Task Chosen(int id)
     {
-
-        foreach (var item in navLinks)
+        for(int i = 0; i < 5; i++)
         {
-            
-            this.test[item] = "on";
+            test[i] = "off";
         }
 
-
-
-        <!--if(isActive == "off")
-        {
-            isActive = "on";
-        }
-        else
-        {
-            isActive = "off";
-        }-->
+        test[id] = "on";
 
     }
 }
