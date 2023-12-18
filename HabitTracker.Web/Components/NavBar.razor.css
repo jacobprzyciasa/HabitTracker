@@ -36,6 +36,14 @@ a, button{
     background-color: #FFFFFF;
     height: 55px;
     width: 55px;
-    border-radius: 50px;
+    border-radius: 50%;
     z-index: 5;
+}
+
+.on{
+    border: 2px solid red;
+}
+
+.off{
+    border: 0;
 }

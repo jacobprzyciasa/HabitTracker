@@ -1,15 +1,38 @@
 ﻿<div class="navigation">
-    <NavLink href=""><img src="images/chart.svg" alt="chart" class="nav-chart"/></NavLink>
-    <NavLink href=""><img src="images/calendar.svg" alt="calendar" class="nav-calendar" /></NavLink>
-    <button><img src="images/plus.svg" alt="add" class="nav-plus active" /></button>
-    <NavLink href=""><img src="images/list.svg" alt="list" class="nav-list"/></NavLink>
-    <NavLink href=""><img src="images/circle.svg" alt="account" class="nav-account"/></NavLink>
+    <NavLink href="" @onclick="Chosen" class="@navLinks[0]"><img src="images/chart.svg" alt="chart" class="nav-chart @test[0]" /></NavLink>
+    <NavLink href="" @onclick="Chosen" class="@navLinks[1]"><img src="images/calendar.svg" alt="calendar" class="nav-calendar @test[1]" /></NavLink>
+    <button @onclick="Chosen" class="@navLinks[2]"><img src="images/plus.svg" alt="add" class="nav-plus active @test[2]" /></button>
+    <NavLink href="" @onclick="Chosen" class="@navLinks[3]"><img src="images/list.svg" alt="list" class="nav-list @test[3]" /></NavLink>
+    <NavLink href="" @onclick="Chosen" class="@navLinks[4]"><img src="images/circle.svg" alt="account" class="nav-account @test[4]" /></NavLink>
 
-    <div class="choise">
-
-    </div>
+    <div class="choise"></div>
 </div>
 
 @code {
+    public string isActive = "off";
+    public int[] navLinks = { 1, 2, 3, 4, 5 };
+    public string[] test = { "off", "off", "off", "off", "off", };
 
+
+    private async Task Chosen()
+    {
+
+        foreach (var item in navLinks)
+        {
+            
+            this.test[item] = "on";
+        }
+
+
+
+        <!--if(isActive == "off")
+        {
+            isActive = "on";
+        }
+        else
+        {
+            isActive = "off";
+        }-->
+
+    }
 }
