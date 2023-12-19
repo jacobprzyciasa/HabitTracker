@@ -17,6 +17,6 @@ div{
     height: 400px;
     width: 90vw;
     background-color: #ffffff;
-    box-shadow: 10px 5px 5px black;
+    box-shadow: 1px 1px 50px #cdcdcd;
     border-radius: 20px;
 }
