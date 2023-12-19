@@ -15,11 +15,16 @@
 
 @code {
     public string buttonText = "Add";
-    public string[] test = { "off", "off", "off", "off" };
+    public string[] test = { "off", "off", "off", "on" };
 
 
     private async Task Chosen(int id)
     {
+        if(test[3] == "on" && test[id] == "on")
+        {
+            Console.WriteLine("Tworzenie habitu");
+        }
+
         for(int i = 0; i < 4; i++)
         {
             test[i] = "off";
@@ -27,15 +32,13 @@
 
         test[id] = "on";
 
-        if(test[3] == "on")
+        if (test[3] == "on")
         {
             buttonText = "Add";
-            Console.WriteLine("Tworzenie habitu");
         }
         else
         {
             buttonText = "Habits";
         }
-
     }
 }
