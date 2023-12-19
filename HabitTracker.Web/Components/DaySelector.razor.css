@@ -1,15 +1,6 @@
 ﻿body {
 }
 
-.calendar-div {
-    position: relative;
-    background-color: #000000;
-    width: 90vw;
-    height: 100px;
-    top: 70px;
-    padding: 20px 20px 0 20px;
-    border-radius: 20px;
-}
 
 ul {
     display: flex;
@@ -17,6 +8,7 @@ ul {
     margin: 0;
     justify-content: center;
     gap: 5vw;
+    width: 90vw;
 }
 
 li {

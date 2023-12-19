@@ -1,48 +1,48 @@
 ﻿<div class="calendar-div">
     <ul>
-        <li @onclick="(() => DaySelect(0))">
+        <li @onclick="(() => DaySelect(1))">
             <p>MON</p>
             <div>
                 <p>1</p>
             </div>
             <div class="current-day-indycator @classNames[1]"></div>
         </li>
-        <li @onclick="(() => DaySelect(1))">
+        <li @onclick="(() => DaySelect(2))">
             <p>TUE</p>
             <div>
                 <p>1</p>
             </div>
             <div class="current-day-indycator @classNames[2]"></div>
         </li>
-        <li @onclick="(() => DaySelect(2))">
+        <li @onclick="(() => DaySelect(3))">
             <p>WED</p>
             <div>
                 <p>1</p>
             </div>
             <div class="current-day-indycator @classNames[3]"></div>
         </li>
-        <li @onclick="(() => DaySelect(3))">
+        <li @onclick="(() => DaySelect(4))">
             <p>THU</p>
             <div>
                 <p>1</p>
             </div>
             <div class="current-day-indycator @classNames[4]"></div>
         </li>
-        <li @onclick="(() => DaySelect(4))">
+        <li @onclick="(() => DaySelect(5))">
             <p>FRI</p>
             <div>
                 <p>1</p>
             </div>
             <div class="current-day-indycator @classNames[5]"></div>
         </li>
-        <li @onclick="(() => DaySelect(5))">
+        <li @onclick="(() => DaySelect(6))">
             <p>SAT</p>
             <div>
                 <p>1</p>
             </div>
             <div class="current-day-indycator @classNames[6]"></div>
         </li>
-        <li @onclick="(() => DaySelect(6))">
+        <li @onclick="(() => DaySelect(0))">
             <p>SUN</p>
             <div>
                 <p>1</p>
@@ -57,10 +57,10 @@
 
     public string[] classNames = { "", "", "", "", "", "", "" };
 
-    classNames[dayOfWeek] = "today";
-
-
-    //get a new date and pass to the string number that represents week day and this will be initial value when customer opens the app
+    protected override async Task OnInitializedAsync()
+    {
+        classNames[dayOfWeek] = "today";
+    }
 
 
     private void DaySelect(int id)
