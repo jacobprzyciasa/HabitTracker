@@ -18,11 +18,11 @@
     public string[] test = { "off", "off", "off", "on" };
 
 
-    private async Task Chosen(int id)
+    private void Chosen(int id)
     {
         if(test[3] == "on" && test[id] == "on")
         {
-            Console.WriteLine("Tworzenie habitu");
+            Console.WriteLine("Tworzenie habitu");// only for code test
         }
 
         for(int i = 0; i < 4; i++)
