@@ -1,6 +1,9 @@
 ﻿body {
 }
 
+.calendar-div {
+    scroll-snap-align: center;
+}
 
 ul {
     display: flex;
@@ -19,7 +22,7 @@ li {
 }
 
 li p {
-    font-size: .8em;
+    font-size: .7em;
     font-weight: 300;
     color: #FFFFFF;
     margin: 5px 0 5px 0;
@@ -31,8 +34,8 @@ li div p {
 
 li div {
     background-color: #FFFFFF;
-    height: 30px;
-    width: 30px;
+    height: 27px;
+    width: 27px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -41,7 +44,7 @@ li div {
 
 .current-day-indycator {
     display: none;
-    margin-top: 5px;
+    margin-top: 7px;
     height: 10px;
     width: 10px;
     background-color: #92ffa3;

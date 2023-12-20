@@ -8,7 +8,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HabitTracker.Api", "HabitTr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HabitTracker.Shared", "HabitTracker.Shared\HabitTracker.Shared.csproj", "{52D1D376-5EE9-4984-9167-51D6696B3AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabitTracker.Web", "HabitTracker.Web\HabitTracker.Web.csproj", "{681EFA6B-3DBC-4A88-A75F-371B5C557B7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HabitTracker.Web", "HabitTracker.Web\HabitTracker.Web.csproj", "{681EFA6B-3DBC-4A88-A75F-371B5C557B7A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,7 +39,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		        SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
 		SolutionGuid = {4F4AA766-6A35-468A-B143-23BD47C21417}
+		        SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
 	EndGlobalSection
 EndGlobal

@@ -10,7 +10,7 @@ button {
     color: #FFF;
     font-weight: 300;
     border: 0;
-    width: 130px;
+    width: 100px;
     height: 35px;
     border-radius: 20px;
     font-weight: 800;
@@ -19,7 +19,7 @@ button {
 .navigation{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     height: 50px;
     width: 100vw;

@@ -1,0 +1,11 @@
+﻿body {
+}
+
+button {
+    width: fit-content;
+    height: 30px;
+    background-color: #ffffff;
+    border: 2px solid black;
+    padding: 5px;
+    color: #000000;
+}
