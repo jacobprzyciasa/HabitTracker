@@ -1,8 +1,15 @@
 ﻿
-<button>@listTitle</button>
+<button @onclick="OnChecked">@listTitle</button>
 
 @code {
     [Parameter]
     public string listTitle { get; set; }
+    [Parameter]
+    public int Id { get; set; }
+
+    public void OnChecked()
+    {
+        
+    }
 
 }

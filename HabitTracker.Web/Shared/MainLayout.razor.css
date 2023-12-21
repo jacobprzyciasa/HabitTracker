@@ -20,3 +20,24 @@ footer {
     bottom: 0;
     background-color: #FCFCFC;
 }
+
+footer::before {
+    content: '';
+    height: 15px;
+    width: 5vw;
+    background: linear-gradient(0deg, rgba(252,252,252,1) 0%, rgba(255,255,255,0) 100%);
+    display: block;
+    position: fixed;
+    bottom: 95px;
+}
+
+footer::after {
+    content: '';
+    height: 15px;
+    width: 5vw;
+    background: linear-gradient(0deg, rgba(252,252,252,1) 0%, rgba(255,255,255,0) 100%);
+    display: block;
+    position: fixed;
+    bottom: 95px;
+    right: 0;
+}

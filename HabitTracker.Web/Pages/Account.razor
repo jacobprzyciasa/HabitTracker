@@ -1,0 +1,67 @@
+﻿@page "/account"
+
+<h3>@welcomeMessage @name</h3>
+
+<div class="basic-info">
+    <img src="/images/profile_picture.jpg" alt="profile picture" />
+    <div >
+        <h4>@name @surname</h4>
+        @if (loginType)
+        {
+            <p>Connected via Google</p>
+        }
+    </div>
+</div>
+
+<div class="info-and-options">
+    <div class="subsection">
+        <div class="friends">
+
+            <div class="friends-img">
+
+                <img src="/images/szymon_skrzypek.jpg" alt="friend" />
+                <img src="/images/jan_walicki.jpg" alt="friend" />
+                <img src="/images/hubert_lech.jpg" alt="friend" />
+            </div>
+
+            <p class="friends-amount">+ @amount</p>
+        </div>
+
+        <h5>Your connections</h5>
+    </div>
+    <div class="subsection">
+    </div>
+    <div class="subsection">
+    </div>
+</div>
+
+@code {
+    public string name { get; set; } // from database
+    public string surname { get; set; } // from database
+    public bool loginType { get; set; } // from database
+    public int amount { get; set; } // from database
+    public string welcomeMessage;
+
+    public static DateTime date = DateTime.Now;
+    public int hour = (int)date.Hour;
+
+    protected override async Task OnInitializedAsync()
+    {
+        name = "Jakub"; // code for test
+        surname = "Przyciasa"; // code for test
+        loginType = true; // code for test
+        amount = 2;
+
+        if(hour >= 1 && hour < 12)
+        {
+            welcomeMessage = "Good morning";
+        }else if(hour >= 12 && hour <= 18)
+        {
+            welcomeMessage = "Good afternoon";
+        }
+        else
+        {
+            welcomeMessage = "Good evening";
+        }
+    }
+}
