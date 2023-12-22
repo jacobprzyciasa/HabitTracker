@@ -1,0 +1,76 @@
+﻿body {
+}
+
+h2 {
+    font-size: 1.2em;
+    margin-left: 40px
+}
+
+img {
+    height: 30px;
+}
+
+.habit-prof-img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 1px solid #000000;
+}
+
+.habit-content {
+    box-shadow: 1px 1px 50px #cdcdcd;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 15px 15px;
+    margin: 20px 0;
+}
+
+.habit-content-main {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.img-and-description {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.habit-content-settings.edit {
+    width: 90vw;
+    height: 100px;
+    transition: .2s;
+}
+
+.nonedit {
+    height: 0;
+    transition: 0.2s;
+}
+
+
+.editable:nth-child(odd) {
+    animation: edit_habits_odd .3s infinite;
+}
+
+.editable:nth-child(even) {
+    animation: edit_habits_even .3s infinite;
+}
+
+@keyframes edit_habits_odd{
+    0%{transform: rotate(0deg);}
+    25%{transform: rotate(0.4deg);}
+    50%{transform: rotate(0deg);}
+    75%{transform: rotate(-0.4deg);}
+    100%{transform: rotate(0deg);}
+}
+
+@keyframes edit_habits_even{
+    0%{transform: rotate(0deg);}
+    25%{transform: rotate(-0.4deg);}
+    50%{transform: rotate(0deg);}
+    75%{transform: rotate(0.4deg);}
+    100%{transform: rotate(0deg);}
+}

@@ -88,3 +88,9 @@ h5 {
     position: relative;
     left: -20px;
 }
+
+span {
+    width: 70vw;
+    height: 1px;
+    background-color: black;
+}

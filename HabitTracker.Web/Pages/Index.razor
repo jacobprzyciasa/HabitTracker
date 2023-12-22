@@ -14,6 +14,7 @@
 
 <div class="buttons-carousel">
 
+    <img src="/images/settings-outline.svg" class="@state" @onclick="Active"/>
     <ListType listTitle="TODO"></ListType>
     <ListType listTitle="Complited"></ListType>
     <ListType listTitle="Custom_1"></ListType>
@@ -21,5 +22,26 @@
 </div>
 
 <div class="content">
-
+    <Habit settings="@habitSettings"></Habit>
+    <Habit settings="@habitSettings"></Habit>
+    <Habit settings="@habitSettings"></Habit>
 </div>
+
+@code {
+    public string state = "off";
+    public bool habitSettings = false;
+
+    public void Active()
+    {
+        if(state == "off")
+        {
+            state = "on";
+            habitSettings = true;
+        }
+        else
+        {
+            state = "off";
+            habitSettings = false;
+        }
+    }
+}

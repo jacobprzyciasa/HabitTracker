@@ -40,11 +40,24 @@ h1 {
 
 .content {
     margin-top: 100px;
-    height: 400px;
+    height: fit-content;
     width: 90vw;
-    background-color: #ffffff;
-    box-shadow: 1px 1px 50px #cdcdcd;
-    border-radius: 20px;
+}
+
+.buttons-carousel img {
+    height: 30px;
+}
+
+.buttons-carousel img.off {
+    filter: invert(50%) sepia(0%) saturate(3199%) hue-rotate(162deg) brightness(103%) contrast(56%);
+    transform: rotate(0deg);
+    transition: .5s;
+}
+
+.buttons-carousel img.on {
+    filter: invert(0%) sepia(8%) saturate(30%) hue-rotate(341deg) brightness(90%) contrast(107%);
+    transform: rotate(180deg);
+    transition: .5s;
 }
 
 .buttons-carousel {
@@ -58,7 +71,6 @@ h1 {
     gap: 15px;
     overflow-x: scroll;
     overflow-y: hidden;
-
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
