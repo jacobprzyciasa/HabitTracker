@@ -27,7 +27,7 @@ namespace HabitTracker.Api.Repositories.HabitRepsitories
         public ICollection<Habit> GetByUserId(int userId)
         {
             return _dbcontext.Set<Habit>()
-                .Where(h => h.habitList.UserHabitLists
+                .Where(h => h.HabitList.UserHabitLists
                 .Any(uhl => uhl.User.Id == userId))
                 .ToList();
         }
@@ -35,7 +35,7 @@ namespace HabitTracker.Api.Repositories.HabitRepsitories
         public ICollection<Habit> GetByListId(int listId)
         {
             return _dbcontext.Set<Habit>()
-                .Where(h => h.habitList.Id == listId)
+                .Where(h => h.HabitList.Id == listId)
                 .ToList();
         }
     }

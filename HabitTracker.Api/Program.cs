@@ -1,11 +1,17 @@
 using HabitTracker.Api;
+using HabitTracker.Api.Entities;
 using HabitTracker.Api.Repositories.HabitListRepositories;
 using HabitTracker.Api.Repositories.HabitRepositories;
 using HabitTracker.Api.Repositories.HabitRepsitories;
 using HabitTracker.Api.Repositories.UserRepositories;
+using HabitTracker.Api.Services.Authentication;
 using HabitTracker.Shared;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +29,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>();
 
 //identity user conf
-builder.Services.AddIdentity<User, IdentityRole>(o =>
+builder.Services.AddIdentity<User, IdentityRole<int>>(o =>
 {
     o.Password.RequireDigit = true;
     o.Password.RequiredLength = 8;
@@ -33,10 +39,41 @@ builder.Services.AddIdentity<User, IdentityRole>(o =>
 .AddDefaultTokenProviders();
 
 
+//jwt auth
+var jwtConfiguration = new JwtConfiguration();
+builder.Configuration.Bind(jwtConfiguration.Section, jwtConfiguration);
+var secretKey = Environment.GetEnvironmentVariable("SECRET");
+
+//auth
+builder.Services.AddTransient<IAuthenticationService, AuthenticationService>();
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtConfiguration.ValidIssuer,
+        ValidAudience = jwtConfiguration.ValidAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+    };
+});
+
+
+
 //Repositiories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IHabitRepository, HabitRepository>();
 builder.Services.AddScoped<IHabitListRepository, HabitListRepository>();
+
+//Mapper
+builder.Services.AddAutoMapper(typeof(Program));
 
 
 
@@ -51,6 +88,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
