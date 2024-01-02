@@ -14,6 +14,7 @@ namespace HabitTracker.Shared.DataTransferObjects
         [Required(ErrorMessage = "Username is required")]
         public string? UserName { get; init; }
         [Required(ErrorMessage = "Password is required")]
+        [MinLength(8, ErrorMessage = "Password is too short")]
         public string? Password { get; init; }
         public string? Email { get; init; }
         public string? PhoneNumber { get; init; }
