@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
 
-namespace HabitTracker.Api.Services.Authentication
+namespace HabitTracker.Api.Services.AuthenticationServices
 {
     public class AuthenticationService : IAuthenticationService
     {

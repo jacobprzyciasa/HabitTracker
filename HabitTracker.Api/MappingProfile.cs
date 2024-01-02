@@ -15,7 +15,7 @@ namespace HabitTracker.Shared
         {
             CreateMap<Habit, HabitDto>();
             CreateMap<UserForRegistrationDto, User>();
-
+            
         }
     }
 }

@@ -1,19 +1,28 @@
 using HabitTracker.Api;
 using HabitTracker.Api.Entities;
+using HabitTracker.Api.Repositories;
 using HabitTracker.Api.Repositories.HabitListRepositories;
 using HabitTracker.Api.Repositories.HabitRepositories;
 using HabitTracker.Api.Repositories.HabitRepsitories;
 using HabitTracker.Api.Repositories.UserRepositories;
+using HabitTracker.Api.Services;
 using HabitTracker.Api.Services.Authentication;
+using HabitTracker.Api.Services.Logger;
 using HabitTracker.Shared;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using NLog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(),
+"/nlog.config"));
+
+builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 
 // Add services to the container.
 
@@ -67,10 +76,8 @@ builder.Services.AddAuthentication(opt =>
 
 
 
-//Repositiories
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IHabitRepository, HabitRepository>();
-builder.Services.AddScoped<IHabitListRepository, HabitListRepository>();
+builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+builder.Services.AddScoped<IServiceManager, ServiceManager>();
 
 //Mapper
 builder.Services.AddAutoMapper(typeof(Program));

@@ -1,7 +1,7 @@
 ﻿using HabitTracker.Shared.DataTransferObjects;
 using Microsoft.AspNetCore.Identity;
 
-namespace HabitTracker.Api.Services.Authentication
+namespace HabitTracker.Api.Services.AuthenticationServices
 {
     public interface IAuthenticationService
     {
