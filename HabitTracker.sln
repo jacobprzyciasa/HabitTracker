@@ -8,6 +8,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HabitTracker.Api", "HabitTr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HabitTracker.Shared", "HabitTracker.Shared\HabitTracker.Shared.csproj", "{52D1D376-5EE9-4984-9167-51D6696B3AA9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HabitTracker.Web", "HabitTracker.Web\HabitTracker.Web.csproj", "{681EFA6B-3DBC-4A88-A75F-371B5C557B7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,12 +30,16 @@ Global
 		{52D1D376-5EE9-4984-9167-51D6696B3AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52D1D376-5EE9-4984-9167-51D6696B3AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{52D1D376-5EE9-4984-9167-51D6696B3AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{681EFA6B-3DBC-4A88-A75F-371B5C557B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{681EFA6B-3DBC-4A88-A75F-371B5C557B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{681EFA6B-3DBC-4A88-A75F-371B5C557B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{681EFA6B-3DBC-4A88-A75F-371B5C557B7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {4F4AA766-6A35-468A-B143-23BD47C21417}
 		        SolutionGuid = {61F7FB11-1E47-470C-91E2-47F8143E1572}
+		SolutionGuid = {4F4AA766-6A35-468A-B143-23BD47C21417}
 	EndGlobalSection
 EndGlobal

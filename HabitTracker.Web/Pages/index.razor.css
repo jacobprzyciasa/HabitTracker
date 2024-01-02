@@ -1,0 +1,80 @@
+﻿body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1 {
+    position: relative;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 800;
+    top: 20px;
+    position: absolute;
+}
+
+.calendar-div-main {
+    position: relative;
+    background-color: #000000;
+    width: 90vw;
+    min-width: 350px;
+    height: 100px;
+    top: 70px;
+    padding: 20px 20px 0 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    gap: 50px;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    scroll-snap-type: x mandatory;
+}
+
+.calendar-div-main::-webkit-scrollbar {
+    display: none;
+}
+
+.content {
+    margin-top: 100px;
+    height: fit-content;
+    width: 90vw;
+}
+
+.buttons-carousel img {
+    height: 30px;
+}
+
+.buttons-carousel img.off {
+    filter: invert(50%) sepia(0%) saturate(3199%) hue-rotate(162deg) brightness(103%) contrast(56%);
+    transform: rotate(0deg);
+    transition: .5s;
+}
+
+.buttons-carousel img.on {
+    filter: invert(0%) sepia(8%) saturate(30%) hue-rotate(341deg) brightness(90%) contrast(107%);
+    transform: rotate(180deg);
+    transition: .5s;
+}
+
+.buttons-carousel {
+    width: 100vw;
+    height: fit-content;
+    padding: 5px 5vw;
+    position: relative;
+    top: 85px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.buttons-carousel::-webkit-scrollbar {
+    display: none;
+}

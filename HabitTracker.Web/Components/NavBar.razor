@@ -1,0 +1,53 @@
+﻿@inject NavigationManager NavManager
+
+<div class="navigation">
+    <NavLink href="/account" @onclick="(() => Chosen(0))" class="@test[0]">
+        <img src="/images/person-outline.svg" />
+    </NavLink>
+    <NavLink href="#" @onclick="(() => Chosen(1))" class="@test[1]">
+        <img src="/images/bar-chart.svg" />
+    </NavLink>
+    <NavLink href="#" @onclick="(() => Chosen(2))" class="@test[2]">
+        <img src="/images/list-outline.svg" />
+    </NavLink>
+    <button @onclick="(() => Chosen(3))" class="@test[3]">
+        @buttonText
+    </button>
+</div>
+
+@code {
+    public string buttonText = "Add";
+    public string[] test = { "off", "off", "off", "on" };
+
+
+    private void Chosen(int id)
+    {
+        if(test[3] == "on" && test[id] == "on")
+        {
+            Console.WriteLine("Tworzenie habitu"); // only for code test
+        }
+
+        if (id == 3 && test[id] == "off")
+        {
+            NavManager.NavigateTo("/");
+        }
+
+        for(int i = 0; i < 4; i++)
+        {
+            test[i] = "off";
+        }
+
+        test[id] = "on";
+
+        if (test[3] == "on")
+        {
+            buttonText = "Add";
+        }
+        else
+        {
+            buttonText = "Habits";
+        }
+
+        
+    }
+}

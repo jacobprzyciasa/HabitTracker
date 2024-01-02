@@ -1,0 +1,39 @@
+﻿body {
+}
+
+img {
+    height: 35px;
+}
+
+button {
+    background-color: black;
+    color: #FFF;
+    font-weight: 300;
+    border: 0;
+    width: 100px;
+    height: 35px;
+    border-radius: 20px;
+    font-weight: 800;
+}
+
+.navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
+    width: 100vw;
+    padding: 0 5vw;
+}
+
+ion-icon {
+    font-size: 64px;
+}
+
+.off img {
+    filter: invert(50%) sepia(0%) saturate(3199%) hue-rotate(162deg) brightness(103%) contrast(56%);
+}
+
+.on img {
+    filter: invert(0%) sepia(8%) saturate(30%) hue-rotate(341deg) brightness(90%) contrast(107%);
+}

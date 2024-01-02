@@ -1,0 +1,46 @@
+﻿<div class="habit-content @(settings ? "editable" : "")">
+    <div class="habit-content-main">
+
+        <div class="img-and-description">
+
+            <img src="@imageSrc" class="habit-prof-img"/>
+            <h2>@title</h2>
+        </div>
+
+        @if (settings)
+        {
+            <img src="/images/menu-outline.svg" class="toggle" @onclick="EditHabit"/>
+        }
+    </div>
+    <div class="habit-content-settings @editMenu">
+        
+    </div>
+</div>
+
+@code {
+    public string imageSrc { get; set; }
+    public string title { get; set; }
+    [Parameter]
+    public bool settings { get; set; }
+
+    public string editMenu = "nonedit";
+
+    protected override async Task OnInitializedAsync()
+    {
+        imageSrc = "/images/person-outline.svg";
+        title = "Read a book";
+    }
+
+    public void EditHabit()
+    {
+        if(editMenu == "nonedit")
+        {
+            editMenu = "edit";
+        }
+        else
+        {
+            editMenu = "nonedit";
+        }
+    }
+
+}
