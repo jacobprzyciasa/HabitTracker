@@ -1,4 +1,4 @@
-﻿@inject INavigationManager NavManager
+﻿@inject NavigationManager NavManager
 
 <div class="navigation">
     <NavLink href="/account" @onclick="(() => Chosen(0))" class="@test[0]">
@@ -8,6 +8,9 @@
         <img src="/images/bar-chart.svg" />
     </NavLink>
     <NavLink href="#" @onclick="(() => Chosen(2))" class="@test[2]">
+        <img src="/images/list-outline.svg" />
+    </NavLink>
+    <NavLink href="/form" @onclick="(() => Chosen(2))" class="@test[2]">
         <img src="/images/list-outline.svg" />
     </NavLink>
     <button @onclick="(() => Chosen(3))" class="@test[3]">

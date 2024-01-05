@@ -1,11 +1,13 @@
-﻿<div>
+﻿@using HabitTracker.Shared.DataTransferObjects;
+
+<div>
 
     <h3>Register</h3>
-
-    <EditForm Model="@UserRegistration" OnSubmit="@Submit" FormName="Registration">
+@*
+    <EditForm Model="@UserRegistration" OnSubmit="@Submit">
         <InputText @bind-value="UserRegistration!.UserName" />
         <InputText @bind-value="UserRegistration!.Password" />
-    </EditForm>
+    </EditForm>*@
 
 </div>
 
