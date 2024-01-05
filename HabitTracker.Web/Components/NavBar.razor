@@ -1,4 +1,4 @@
-﻿@inject NavigationManager NavManager
+﻿@inject INavigationManager NavManager
 
 <div class="navigation">
     <NavLink href="/account" @onclick="(() => Chosen(0))" class="@test[0]">
@@ -25,6 +25,7 @@
         if(test[3] == "on" && test[id] == "on")
         {
             Console.WriteLine("Tworzenie habitu"); // only for code test
+            NavManager.NavigateTo("/add");
         }
 
         if (id == 3 && test[id] == "off")
