@@ -11,10 +11,7 @@ namespace HabitTracker.Shared.DataTransferObjects
     public record HabitCompleteStatusDto(int Id, User user, DateOnly Date, bool Complete);
     public record HabitListDto(int Id, string Name, ICollection<Habit> Habits, ICollection<UserHabitList> UserHabitLists);
     public record TokenDto(string AccessToken, string RefreshToken);
-
-
-
-
+    public record UserDto(int Id, string UserName, string Email, bool EmailConfirmed);
 
 
 }

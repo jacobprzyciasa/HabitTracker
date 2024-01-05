@@ -26,11 +26,11 @@ namespace HabitTracker.Api.Services
             IConfiguration configuration, 
             ILoggerManager logger)
         {
-            _habitCompleteStatusService = new Lazy<IHabitCompleteStatusService>(() => new HabitCompleteStatusService(repositoryManager, mapper));
-            _habitListService = new Lazy<IHabitListService>(() => new HabitListService(repositoryManager, mapper));
+            _habitCompleteStatusService = new Lazy<IHabitCompleteStatusService>(() => new HabitCompleteStatusService(repositoryManager, mapper, logger));
+            _habitListService = new Lazy<IHabitListService>(() => new HabitListService(repositoryManager, mapper, logger));
             _habitService = new Lazy<IHabitService>(() => new HabitService(repositoryManager, mapper, logger));
-            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper));
-            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper));
+            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper, logger));
+            _userService = new Lazy<IUserService>(() => new UserService(repositoryManager, mapper, logger));
             _authService = new Lazy<IAuthenticationService>(() => new AuthenticationService(mapper, userManager, configuration));
         }
 

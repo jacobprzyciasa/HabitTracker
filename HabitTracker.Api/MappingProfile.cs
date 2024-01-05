@@ -14,6 +14,9 @@ namespace HabitTracker.Shared
         public MappingProfile() 
         {
             CreateMap<Habit, HabitDto>();
+            CreateMap<HabitList, HabitListDto>();
+            CreateMap<HabitCompleteStatus, HabitCompleteStatusDto>();
+            CreateMap<User, UserDto>();
             CreateMap<UserForRegistrationDto, User>();
             
         }

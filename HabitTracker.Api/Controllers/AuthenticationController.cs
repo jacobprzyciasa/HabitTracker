@@ -1,5 +1,5 @@
 ﻿using HabitTracker.Api.Services;
-using HabitTracker.Api.Services.Authentication;
+using HabitTracker.Api.Services.AuthenticationServices;
 using HabitTracker.Shared.DataTransferObjects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

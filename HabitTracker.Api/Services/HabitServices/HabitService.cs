@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using HabitTracker.Api.Repositories;
+using HabitTracker.Api.Services.HabitListServices;
 using HabitTracker.Api.Services.Logger;
+using HabitTracker.Shared.DataTransferObjects;
+using HabitTracker.Shared;
 
 namespace HabitTracker.Api.Services.HabitServices
 {
@@ -16,7 +19,79 @@ namespace HabitTracker.Api.Services.HabitServices
             _logger = logger;
         }
 
-        
+        public void Add(HabitDto entity)
+        {
+            try
+            {
+                Habit habit = _mapper.Map<Habit>(entity);
+                _repositoryManager.Habit.Add(habit);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(Add)} service:{nameof(HabitService)} exeption: {ex}");
+            }
+        }
+
+
+        public void Delete(HabitDto entity)
+        {
+            try
+            {
+                Habit habit = _mapper.Map<Habit>(entity);
+                _repositoryManager.Habit.Delete(habit);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(Delete)} service:{nameof(HabitService)} exeption: {ex}");
+            }
+        }
+
+        public IEnumerable<HabitDto> GetAll()
+        {
+            try
+            {
+                var entities = _repositoryManager.Habit.GetAll();
+                var habit = _mapper.Map<IEnumerable<HabitDto>>(entities);
+                return habit;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(GetAll)} service:{nameof(HabitService)} exeption: {ex}");
+                throw;
+            }
+        }
+
+        public HabitDto GetById(int id)
+        {
+            try
+            {
+                var entity = _repositoryManager.Habit.GetById(id);
+                var habit = _mapper.Map<HabitDto>(entity);
+                return habit;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(GetById)} service:{nameof(HabitService)} exeption: {ex}");
+                throw;
+            }
+        }
+
+        public void Update(HabitDto entity)
+        {
+            try
+            {
+                var habit = _mapper.Map<Habit>(entity);
+                _repositoryManager.Habit.Update(habit);
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(Update)} service:{nameof(HabitService)} exeption: {ex}");
+                throw;
+            }
+        }
 
     }
 }

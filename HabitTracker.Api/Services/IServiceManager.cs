@@ -1,7 +1,7 @@
-﻿using HabitTracker.Api.Services.Authentication;
-using HabitTracker.Api.Services.HabitCompleteStatus;
-using HabitTracker.Api.Services.HabitList;
-using HabitTracker.Api.Services.Habit;
+﻿using HabitTracker.Api.Services.AuthenticationServices;
+using HabitTracker.Api.Services.HabitCompleteStatusServices;
+using HabitTracker.Api.Services.HabitListServices;
+using HabitTracker.Api.Services.HabitServices;
 using HabitTracker.Api.Services.UserServices;
 
 namespace HabitTracker.Api.Services
