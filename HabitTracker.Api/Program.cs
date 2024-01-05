@@ -32,10 +32,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //server db base
-//builder.Services.AddDbContext<AppDbContext>(options => options.UseMySQL("Server=localhost;Database=habit_tracker;Uid=root;Pwd=;"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySQL("Server=localhost;Database=habit_tracker;Uid=root;Pwd=;"));
 
 // in memory db
-builder.Services.AddDbContext<AppDbContext>();
+//builder.Services.AddDbContext<AppDbContext>();
 
 //identity user conf
 builder.Services.AddIdentity<User, IdentityRole<int>>(o =>

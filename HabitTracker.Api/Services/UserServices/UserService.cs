@@ -19,5 +19,37 @@ namespace HabitTracker.Api.Services.UserServices
             _logger = logger;
         }
 
+
+        public UserDto GetByUserName(string username)
+        {
+            try
+            {
+                var entity = _repositoryManager.User.GetByUsername(username);
+                var user = _mapper.Map<UserDto>(entity);
+                return user;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(GetByUserName)} service:{nameof(UserService)} exeption: {ex}");
+                throw;
+            }
+        }
+
+        public UserDto GetById(int id)
+        {
+            try
+            {
+                var entity = _repositoryManager.User.GetById(id);
+                var user = _mapper.Map<UserDto>(entity);
+                return user;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(GetById)} service:{nameof(UserService)} exeption: {ex}");
+                throw;
+            }
+        }
     }
 }
