@@ -21,15 +21,17 @@ namespace HabitTracker.Api.Repositories.HabitListRepositories
         {
             return _dbcontext.Set<HabitList>()
                 .Include(hl => hl.UserHabitLists)
+                .ThenInclude(uhl => uhl.User)
                 .Include(hl => hl.Habits)
                 .ThenInclude(h => h.DailyCompleteStatus)
-                .First(hl => hl.Id == id);
+                .FirstOrDefault(hl => hl.Id == id);
         }
 
         public ICollection<HabitList> GetByUserId(int userId)
         {
             return _dbcontext.Set<HabitList>()
                 .Include(hl => hl.UserHabitLists)
+                .ThenInclude(uhl=>uhl.User)
                 .Include(hl => hl.Habits)
                 .ThenInclude(h => h.DailyCompleteStatus)
                 .Where(hl => hl.UserHabitLists.Any(uhl => uhl.User.Id == userId))

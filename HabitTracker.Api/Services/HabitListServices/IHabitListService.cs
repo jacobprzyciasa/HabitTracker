@@ -2,7 +2,8 @@
 
 namespace HabitTracker.Api.Services.HabitListServices
 {
-    public interface IHabitListService : IEntityServiceBase<HabitListDto>
+    public interface IHabitListService : IDbEntityServiceBase<HabitListDto, HabitListForCreationDto>
     {
+
     }
 }

@@ -19,16 +19,22 @@ namespace HabitTracker.Api.Services.HabitServices
             _logger = logger;
         }
 
-        public void Add(HabitDto entity)
+        public HabitDto Add(HabitForCreationDto entity)
         {
             try
             {
                 Habit habit = _mapper.Map<Habit>(entity);
                 _repositoryManager.Habit.Add(habit);
+                _repositoryManager.Save();
+
+                var habitToReturn = _mapper.Map<HabitDto>(habit);
+                return habitToReturn;
+
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong in the method:{nameof(Add)} service:{nameof(HabitService)} exeption: {ex}");
+                throw;
             }
         }
 
@@ -39,6 +45,7 @@ namespace HabitTracker.Api.Services.HabitServices
             {
                 Habit habit = _mapper.Map<Habit>(entity);
                 _repositoryManager.Habit.Delete(habit);
+                _repositoryManager.Save();
             }
             catch (Exception ex)
             {
@@ -78,12 +85,16 @@ namespace HabitTracker.Api.Services.HabitServices
             }
         }
 
-        public void Update(HabitDto entity)
+        public HabitDto Update(HabitDto entity)
         {
             try
             {
                 var habit = _mapper.Map<Habit>(entity);
                 _repositoryManager.Habit.Update(habit);
+                _repositoryManager.Save();
+
+                var habitToReturn = _mapper.Map<HabitDto>(habit);
+                return habitToReturn;
 
             }
             catch (Exception ex)

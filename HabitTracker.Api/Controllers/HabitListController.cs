@@ -16,35 +16,44 @@ namespace HabitTracker.Api.Controllers
 
 
 
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var result = _services.HabitListService.GetById(id);
+            try
+            {
+                var result = _services.HabitListService.GetById(id);
 
-            if (result == null)
-                return NotFound();
+                if (result == null)
+                    return NotFound();
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(HabitListDto entity)
+        public async Task<IActionResult> Post(HabitListForCreationDto entity)
         {
+            try
+            {
+                if (entity == null)
+                    return BadRequest();
 
-            if (entity == null)
-                return BadRequest();
+                var result = _services.HabitListService.Add(entity);
 
-            _services.HabitListService.Add(entity);
-            
-
-            var result = _services.HabitListService.GetById(entity.Id);
-
-            if (result == null)
-                return NotFound();
+                if (result == null)
+                    return NotFound();
 
 
-            return Created(nameof(Get), result);
+                return Created(nameof(Get), result);
+            }
+            catch
+            {
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }

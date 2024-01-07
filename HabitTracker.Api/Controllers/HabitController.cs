@@ -25,24 +25,7 @@ namespace HabitTracker.Api.Controllers
             return Ok(result);
         }
 
-        
-        [HttpPost]
-        public async Task<IActionResult> Post(HabitDto entity)
-        {
 
-            if (entity == null)
-                return BadRequest();
-            
-            _services.HabitService.Add(entity);
-
-            var result = _services.HabitService.GetById(entity.Id);
-
-            if(result == null)
-                return NotFound();
-
-
-            return Created(nameof(Get),result);
-        }
 
 
 

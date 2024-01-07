@@ -19,16 +19,32 @@ namespace HabitTracker.Api.Services.HabitListServices
             _logger = logger;
         }
 
-        public void Add(HabitListDto entity)
+        public HabitListDto Add(HabitListForCreationDto entity)
         {
             try
             {
                 HabitList habitList = _mapper.Map<HabitList>(entity);
+
+                //inject entites of userhabitList from db
+                List<UserHabitList> userHabitLists = new List<UserHabitList>();
+                foreach (var i in habitList.UserHabitLists)
+                {
+                    var user = _repositoryManager.User.GetById(i.User.Id);
+                    userHabitLists.Add(new() { User=user, Role=i.Role });
+                }
+                habitList.UserHabitLists = userHabitLists;
+
                 _repositoryManager.HabitList.Add(habitList);
+                _repositoryManager.Save();
+
+                var habitListToReturn = _mapper.Map<HabitListDto>(habitList);
+                return habitListToReturn;
+
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong in the method:{nameof(Add)} service:{nameof(HabitListService)} exeption: {ex}");
+                throw;
             }
         }
 
@@ -38,6 +54,7 @@ namespace HabitTracker.Api.Services.HabitListServices
             {
                 HabitList habitList = _mapper.Map<HabitList>(entity);
                 _repositoryManager.HabitList.Delete(habitList);
+                _repositoryManager.Save();
             }
             catch (Exception ex)
             {
@@ -77,12 +94,26 @@ namespace HabitTracker.Api.Services.HabitListServices
             }
         }
 
-        public void Update(HabitListDto entity)
+        public HabitListDto Update(HabitListDto entity)
         {
             try
             {
                 var habitList = _mapper.Map<HabitList>(entity);
                 _repositoryManager.HabitList.Update(habitList);
+
+                //inject entites of userhabitList from db
+                List<UserHabitList> userHabitLists = new List<UserHabitList>();
+                foreach (var i in habitList.UserHabitLists)
+                {
+                    var user = _repositoryManager.User.GetById(i.User.Id);
+                    userHabitLists.Add(new() { User = user, Role = i.Role });
+                }
+                habitList.UserHabitLists = userHabitLists;
+
+                _repositoryManager.Save();
+
+                var habitListToReturn = _mapper.Map<HabitListDto>(habitList);
+                return habitListToReturn;
 
             }
             catch (Exception ex)

@@ -1,10 +1,9 @@
-﻿using HabitTracker.Shared;
-using HabitTracker.Shared.DataTransferObjects;
+﻿using HabitTracker.Shared.DataTransferObjects;
 
 namespace HabitTracker.Api.Services.HabitServices
 {
-    public interface IHabitService : IEntityServiceBase<HabitDto>
+    public interface IHabitService : IDbEntityServiceBase<HabitDto, HabitForCreationDto>
     {
-        
+
     }
 }

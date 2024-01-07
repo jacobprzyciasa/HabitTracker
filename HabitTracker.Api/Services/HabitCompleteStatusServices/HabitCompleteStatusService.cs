@@ -20,16 +20,22 @@ namespace HabitTracker.Api.Services.sHabitCompleteStatusServices
             _logger = logger;
         }
 
-        public void Add(HabitCompleteStatusDto entity)
+        public HabitCompleteStatusDto Add(HabitCompleteStatusForCreationDto entity)
         {
             try
             {
                 HabitCompleteStatus habitCompleteStatus = _mapper.Map<HabitCompleteStatus>(entity);
                 _repositoryManager.HabitCompleteStatus.Add(habitCompleteStatus);
+                _repositoryManager.Save();
+
+
+                var habitCompleteStatusToReturn = _mapper.Map<HabitCompleteStatusDto>(habitCompleteStatus);
+                return habitCompleteStatusToReturn;
             }
             catch (Exception ex)
             {
                 _logger.LogError($"Something went wrong in the method:{nameof(Add)} service:{nameof(HabitCompleteStatusService)} exeption: {ex}");
+                throw;
             }
         }
 
@@ -39,6 +45,7 @@ namespace HabitTracker.Api.Services.sHabitCompleteStatusServices
             {
                 HabitCompleteStatus habitCompleteStatus = _mapper.Map<HabitCompleteStatus>(entity);
                 _repositoryManager.HabitCompleteStatus.Delete(habitCompleteStatus);
+                _repositoryManager.Save();
             }
             catch (Exception ex)
             {
@@ -78,12 +85,16 @@ namespace HabitTracker.Api.Services.sHabitCompleteStatusServices
             }
         }
 
-        public void Update(HabitCompleteStatusDto entity)
+        public HabitCompleteStatusDto Update(HabitCompleteStatusDto entity)
         {
             try
             {
                 var habitCompleteStatus = _mapper.Map<HabitCompleteStatus>(entity);
                 _repositoryManager.HabitCompleteStatus.Update(habitCompleteStatus);
+                _repositoryManager.Save();
+
+                var habitCompleteStatusToReturn = _mapper.Map<HabitCompleteStatusDto>(habitCompleteStatus);
+                return habitCompleteStatusToReturn;
 
             }
             catch (Exception ex)

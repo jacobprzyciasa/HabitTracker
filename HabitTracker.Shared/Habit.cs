@@ -13,6 +13,8 @@ namespace HabitTracker.Shared
         public int Id {  get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        
+        public int HabitListId { get; set; }
         public HabitList HabitList { get; set; }
         public ICollection<HabitCompleteStatus> DailyCompleteStatus { get; set; }
     }
