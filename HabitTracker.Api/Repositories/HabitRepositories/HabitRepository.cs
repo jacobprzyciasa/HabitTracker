@@ -21,7 +21,7 @@ namespace HabitTracker.Api.Repositories.HabitRepsitories
         {
             return _dbcontext.Set<Habit>()
                 .Include(h => h.DailyCompleteStatus)
-                .FirstOrDefault(h => h.Id == id);
+                .FirstOrDefault(h => h.Id == id)!;
         }
 
         public ICollection<Habit> GetByUserId(int userId)

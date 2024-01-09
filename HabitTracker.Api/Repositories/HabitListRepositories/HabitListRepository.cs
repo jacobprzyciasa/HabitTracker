@@ -24,7 +24,7 @@ namespace HabitTracker.Api.Repositories.HabitListRepositories
                 .ThenInclude(uhl => uhl.User)
                 .Include(hl => hl.Habits)
                 .ThenInclude(h => h.DailyCompleteStatus)
-                .FirstOrDefault(hl => hl.Id == id);
+                .FirstOrDefault(hl => hl.Id == id)!;
         }
 
         public ICollection<HabitList> GetByUserId(int userId)
@@ -37,5 +37,6 @@ namespace HabitTracker.Api.Repositories.HabitListRepositories
                 .Where(hl => hl.UserHabitLists.Any(uhl => uhl.User.Id == userId))
                 .ToList();
         }
+
     }
 }

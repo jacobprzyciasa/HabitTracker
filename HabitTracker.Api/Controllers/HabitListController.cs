@@ -55,5 +55,29 @@ namespace HabitTracker.Api.Controllers
                 return StatusCode(500, "Internal server error");
             }
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(HabitListDto entity)
+        {
+            try
+            {
+                if (entity == null)
+                    return BadRequest();
+
+                _services.HabitListService.Delete(entity);
+
+                var result = _services.HabitListService.GetById(entity.Id);
+
+                if (result != null)
+                    return NotFound();
+
+
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
     }
 }

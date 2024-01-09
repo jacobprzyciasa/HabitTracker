@@ -13,7 +13,6 @@ namespace HabitTracker.Shared
     {
         [Key]
         public int Id { get; set; }
-        [AllowNull]
         public User User { get; set; }
         public HabitRole Role { get; set; }
     }

@@ -24,6 +24,17 @@ namespace HabitTracker.Api.Services.HabitServices
             try
             {
                 Habit habit = _mapper.Map<Habit>(entity);
+
+                habit.HabitList = _repositoryManager.HabitList.GetById(habit.HabitList.Id);
+
+                List<HabitCompleteStatus> habitCompleteStatus = new List<HabitCompleteStatus>();
+                foreach (var i in habit.DailyCompleteStatus)
+                {
+                    var user = _repositoryManager.User.GetById(i.User.Id);
+                    habitCompleteStatus.Add(new() { User = user, Date = i.Date, Complete=i.Complete });
+                }
+                habit.DailyCompleteStatus = habitCompleteStatus;
+
                 _repositoryManager.Habit.Add(habit);
                 _repositoryManager.Save();
 
@@ -69,6 +80,22 @@ namespace HabitTracker.Api.Services.HabitServices
             }
         }
 
+        public ICollection<HabitDto> GetByListId(int listId)
+        {
+            try
+            {
+                var entity = _repositoryManager.Habit.GetByListId(listId);
+                var habits = _mapper.Map<ICollection<HabitDto>>(entity);
+                return habits;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(GetAll)} service:{nameof(HabitService)} exeption: {ex}");
+                throw;
+            }
+        }
+
         public HabitDto GetById(int id)
         {
             try
@@ -90,6 +117,17 @@ namespace HabitTracker.Api.Services.HabitServices
             try
             {
                 var habit = _mapper.Map<Habit>(entity);
+
+                habit.HabitList = _repositoryManager.HabitList.GetById(habit.HabitList.Id);
+
+                List<HabitCompleteStatus> habitCompleteStatus = new List<HabitCompleteStatus>();
+                foreach (var i in habit.DailyCompleteStatus)
+                {
+                    var user = _repositoryManager.User.GetById(i.User.Id);
+                    habitCompleteStatus.Add(new() { User = user, Date = i.Date, Complete = i.Complete });
+                }
+                habit.DailyCompleteStatus = habitCompleteStatus;
+
                 _repositoryManager.Habit.Update(habit);
                 _repositoryManager.Save();
 
