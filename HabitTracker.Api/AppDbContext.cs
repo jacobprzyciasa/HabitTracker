@@ -13,7 +13,7 @@ namespace HabitTracker.Api
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("habit_tracker");
+            //optionsBuilder.UseInMemoryDatabase("habit_tracker");
             base.OnConfiguring(optionsBuilder);
         }
 

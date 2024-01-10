@@ -7,7 +7,6 @@ using HabitTracker.Api.Repositories.HabitRepsitories;
 using HabitTracker.Api.Repositories.UserRepositories;
 using HabitTracker.Api.Services;
 using HabitTracker.Api.Services.AuthenticationServices;
-using HabitTracker.Api.Services.AuthenticationServices;
 using HabitTracker.Api.Services.Logger;
 using HabitTracker.Shared;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,6 +19,13 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+{
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader();
+}));
+
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(),
 "/nlog.config"));
 
@@ -27,16 +33,19 @@ builder.Services.AddSingleton<ILoggerManager, LoggerManager>();
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //server db base
-//builder.Services.AddDbContext<AppDbContext>(options => options.UseMySQL("Server=localhost;Database=habit_tracker;Uid=root;Pwd=;"));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySQL("Server=localhost;Database=habit_tracker;Uid=root;Pwd=;"));
 
 // in memory db
-builder.Services.AddDbContext<AppDbContext>();
+//builder.Services.AddDbContext<AppDbContext>();
 
 //identity user conf
 builder.Services.AddIdentity<User, IdentityRole<int>>(o =>
@@ -86,6 +95,8 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

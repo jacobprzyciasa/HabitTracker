@@ -1,6 +1,9 @@
-﻿namespace HabitTracker.Api.Services.HabitCompleteStatusServices
+﻿using HabitTracker.Shared;
+using HabitTracker.Shared.DataTransferObjects;
+
+namespace HabitTracker.Api.Services.HabitCompleteStatusServices
 {
-    public interface IHabitCompleteStatusService
+    public interface IHabitCompleteStatusService : IDbEntityServiceBase<HabitCompleteStatusDto, HabitCompleteStatusForCreationDto>
     {
     }
 }
