@@ -1,0 +1,26 @@
+﻿body {
+    
+}
+
+.add-habit {
+    padding: 70px 90vw 0 90vw;
+}
+
+img {
+    position: absolute;
+    right: 10vw;
+    top: 20px;
+    width: 40px;
+}
+
+h3 {
+    position: relative;
+    text-align: center;
+}
+
+.add-habit-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

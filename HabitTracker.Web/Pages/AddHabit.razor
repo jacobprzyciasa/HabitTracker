@@ -1,0 +1,18 @@
+﻿@page "/add"
+@inject NavigationManager NavManager
+
+<div class="add-habit">
+    <img @onclick="CloseForm" src="images/x.svg" />
+    <h3>AddHabit</h3>
+
+    <div class="add-habit-content">
+
+    </div>
+
+</div>
+@code {
+    private void CloseForm()
+    {
+        NavManager.NavigateTo("/");
+    }
+}

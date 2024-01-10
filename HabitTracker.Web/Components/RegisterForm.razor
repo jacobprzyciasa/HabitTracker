@@ -3,21 +3,44 @@
 <div>
 
     <h3>Register</h3>
-@*
-    <EditForm Model="@UserRegistration" OnSubmit="@Submit">
-        <InputText @bind-value="UserRegistration!.UserName" />
-        <InputText @bind-value="UserRegistration!.Password" />
-    </EditForm>*@
+
+    <form onsubmit="@Submit">
+        <input type="text" @bind-value="UserName" />
+        <input type="email" @bind-value="Email" />
+        <input type="password" @bind-value="Password" />
+        <input type="password" @bind-value="PasswordRepeat" />
+        <p class="error @appearance">Password does not match</p>
+        <button type="submit">Register</button>
+    </form>
 
 </div>
 
 @code {
-    public UserForRegistrationDto? UserRegistration { get; set; }
+    public string UserName;
+    public string Password;
+    public string PasswordRepeat;
+    public string Email;
+    public string appearance;
 
-    protected override void OnInitialized() => UserRegistration ??= new();
 
     private void Submit()
     {
-        
+
+        if (Password == PasswordRepeat)
+        {
+            appearance = "hide";
+            UserForRegistrationDto userRegister = new UserForRegistrationDto()
+                {
+                    UserName = this.UserName,
+                    Email = this.Email,
+                    Password = this.Password
+                };
+
+        }
+        else
+        {
+            appearance = "show";
+        }
+
     }
 }

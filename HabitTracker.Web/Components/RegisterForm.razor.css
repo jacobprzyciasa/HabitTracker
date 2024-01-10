@@ -1,2 +1,13 @@
 ﻿body {
 }
+
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: inline;
+    position: relative;
+    color: red;
+}

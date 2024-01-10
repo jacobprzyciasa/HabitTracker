@@ -1,0 +1,32 @@
+﻿@using HabitTracker.Shared.DataTransferObjects;
+
+<div>
+
+    <h3>Login</h3>
+
+    <form onsubmit="@Submit">
+        <input type="text" @bind-value="UserName" />
+        <input type="password" @bind-value="Password" />
+        <p class="error @appearance">Incorrect password or username</p>
+        <button type="submit">Register</button>
+    </form>
+
+</div>
+
+@code {
+    public string UserName;
+    public string Password;
+    public string appearance;
+
+    private void Submit()
+    {
+
+        UserForAuthenticationDto userAutentication = new UserForAuthenticationDto()
+            {
+                UserName = this.UserName,
+                Password = this.Password
+            };
+
+
+    }
+}
