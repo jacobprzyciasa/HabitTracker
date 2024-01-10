@@ -98,18 +98,21 @@ namespace HabitTracker.Api.Services.HabitListServices
         {
             try
             {
-                var habitList = _mapper.Map<HabitList>(entity);
-
-
-
-                //for (int i = 0; i<habitList.UserHabitLists.Count; i++)
-                //{
-                //    var user = _repositoryManager.User.GetById(habitList.UserHabitLists.ToList()[i].User.Id);
-                //    habitList.UserHabitLists
-                //}
-                //habitList.UserHabitLists = userHabitLists;
-
                 
+
+                var habitList = _repositoryManager.HabitList.GetById(entity.Id);
+
+                habitList.Name = entity.Name;
+                habitList.Habits = entity.Habits;
+
+
+                List<UserHabitList> userHabitLists = new List<UserHabitList>();
+                foreach (var i in entity.UserHabitLists)
+                {
+                    var user = _repositoryManager.User.GetById(i.User.Id);
+                    userHabitLists.Add(new() { User = user, Role = i.Role });
+                }
+                habitList.UserHabitLists = userHabitLists;
 
                 _repositoryManager.HabitList.Update(habitList);
                 _repositoryManager.Save();
