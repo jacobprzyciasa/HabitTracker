@@ -4,7 +4,7 @@
         <div class="img-and-description">
 
             <img src="@imageSrc" class="habit-prof-img"/>
-            <h2>@title</h2>
+            <h2>@habit.Name</h2>
         </div>
 
         @if (settings)
@@ -19,16 +19,17 @@
 
 @code {
     public string imageSrc { get; set; }
-    public string title { get; set; }
     [Parameter]
     public bool settings { get; set; }
+
+    [Parameter]
+    public Habit habit { get; set; }
 
     public string editMenu = "nonedit";
 
     protected override async Task OnInitializedAsync()
     {
         imageSrc = "/images/person-outline.svg";
-        title = "Read a book";
     }
 
     public void EditHabit()

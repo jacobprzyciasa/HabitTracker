@@ -4,6 +4,9 @@
 
 <h1>HabitTracker</h1>
 
+<RegisterForm></RegisterForm>
+<LoginForm></LoginForm>
+
 <div class="calendar-div-main">
 
     <DaySelector></DaySelector>
@@ -22,19 +25,8 @@
 </div>
 
 <div class="content">
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
-    <Habit settings="@habitSettings"></Habit>
+    <HabitListDisplay settings="@habitSettings"></HabitListDisplay>
+    
 </div>
 
 @code {

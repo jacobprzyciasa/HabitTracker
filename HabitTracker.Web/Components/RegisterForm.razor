@@ -1,4 +1,6 @@
 ﻿@using HabitTracker.Shared.DataTransferObjects;
+@inject IUserService userServise;
+@inject IHabitListService habitListService;
 
 <div>
 
@@ -23,10 +25,10 @@
     public string appearance;
 
 
-    private void Submit()
+    private async void Submit()
     {
 
-        if (Password == PasswordRepeat)
+        if ((Password == PasswordRepeat) || (!String.IsNullOrEmpty(Password)))
         {
             appearance = "hide";
             UserForRegistrationDto userRegister = new UserForRegistrationDto()
@@ -35,6 +37,12 @@
                     Email = this.Email,
                     Password = this.Password
                 };
+
+            userServise.RegisterUser(userRegister);
+
+            UserDto user = await userServise.GetUserFromUsername(userRegister.UserName);
+
+            Console.WriteLine(user.Id);
 
         }
         else

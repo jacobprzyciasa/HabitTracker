@@ -1,0 +1,31 @@
+﻿<h3>@habitList.Name</h3>
+
+@if (habitList.Habits.Count == 0)
+{
+    <p>nic nie ma</p>
+}
+else
+{
+    foreach (Habit i in habitList.Habits)
+    {
+        <HabitDisplay settings="@settings" habit="i"></HabitDisplay>
+    }
+}
+
+@code {
+    [Parameter]
+    public bool settings { get; set; }
+
+    public HabitList habitList { get; set; }
+
+    protected override void OnInitialized()
+    {
+        habitList = new HabitList();
+        habitList.Name = "To do in home";
+        habitList.Habits = new List<Habit>();
+        habitList.Habits.Add(new Habit() { Name="Clean floor" });
+        habitList.Habits.Add(new Habit() { Name = "Cook dinner" });
+
+        base.OnInitialized();
+    }
+}

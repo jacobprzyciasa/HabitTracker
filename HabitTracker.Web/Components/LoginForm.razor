@@ -1,4 +1,5 @@
 ﻿@using HabitTracker.Shared.DataTransferObjects;
+@inject IUserService userService;
 
 <div>
 
@@ -18,7 +19,7 @@
     public string Password;
     public string appearance;
 
-    private void Submit()
+    private async void Submit()
     {
 
         UserForAuthenticationDto userAutentication = new UserForAuthenticationDto()
@@ -27,6 +28,7 @@
                 Password = this.Password
             };
 
-
+        TokenDto token = await userService.LoginUser(userAutentication);
+        Console.WriteLine(token.AccessToken);
     }
 }
