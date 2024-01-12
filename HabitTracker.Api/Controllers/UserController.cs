@@ -22,5 +22,16 @@ namespace HabitTracker.Api.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("id/{id}")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            var result = _services.UserService.GetById(id);
+
+            if (result == null)
+                return NotFound();
+
+            return Ok(result);
+        }
     }
 }

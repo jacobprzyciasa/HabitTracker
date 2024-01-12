@@ -1,6 +1,8 @@
-﻿@using HabitTracker.Shared.DataTransferObjects;
+﻿@using Blazored.LocalStorage;
+@using HabitTracker.Shared.DataTransferObjects;
 @inject IUserService userService;
 @inject ITokenService tokenService;
+@inject ILocalStorageService localStorageService;
 
 <div>
 
@@ -31,6 +33,10 @@
 
         TokenDto token = await userService.LoginUser(userAutentication);
         await tokenService.SetToken(token);
+
+        UserDto user = await userService.GetUserFromUsername(userAutentication.UserName);
+        await localStorageService.SetItemAsync("userId", user.Id);
+
         Console.WriteLine(token.AccessToken);
     }
 }
