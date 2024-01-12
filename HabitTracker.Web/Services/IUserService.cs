@@ -9,7 +9,7 @@ namespace HabitTracker.Web.Services
         public Task RegisterUser(UserForRegistrationDto user);
         [Post("/authentication/login")]
         public Task<TokenDto> LoginUser(UserForAuthenticationDto user);
-        [Get("users/{username}")]
+        [Get("/users/{username}")]
         public Task<UserDto> GetUserFromUsername(string username);
     }
 }

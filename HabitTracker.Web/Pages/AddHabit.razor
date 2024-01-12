@@ -1,6 +1,7 @@
 ﻿@page "/add"
-@inject NavigationManager NavManager
 
+@inject NavigationManager NavManager
+@attribute [Authorize]
 <div class="add-habit">
     <img @onclick="CloseForm" src="images/x.svg" />
     <h3>AddHabit</h3>

@@ -1,5 +1,6 @@
 ﻿@using HabitTracker.Shared.DataTransferObjects;
 @inject IUserService userService;
+@inject ITokenService tokenService;
 
 <div>
 
@@ -29,6 +30,7 @@
             };
 
         TokenDto token = await userService.LoginUser(userAutentication);
+        await tokenService.SetToken(token);
         Console.WriteLine(token.AccessToken);
     }
 }
