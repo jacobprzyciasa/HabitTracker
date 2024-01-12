@@ -49,6 +49,24 @@ namespace HabitTracker.Api.Controllers
             }
         }
 
+        [HttpGet("userId/{id}")]
+        public async Task<IActionResult> GetByUserId(int id)
+        {
+            try
+            {
+                var result = _services.HabitService.GetByUserId(id);
+
+                if (result == null)
+                    return NotFound();
+
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(HabitForCreationDto entity)
         {

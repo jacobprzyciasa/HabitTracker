@@ -91,7 +91,23 @@ namespace HabitTracker.Api.Services.HabitServices
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Something went wrong in the method:{nameof(GetAll)} service:{nameof(HabitService)} exeption: {ex}");
+                _logger.LogError($"Something went wrong in the method:{nameof(GetByListId)} service:{nameof(HabitService)} exeption: {ex}");
+                throw;
+            }
+        }
+
+        public ICollection<HabitDto> GetByUserId(int userId)
+        {
+            try
+            {
+                var entity = _repositoryManager.Habit.GetByUserId(userId);
+                var habits = _mapper.Map<ICollection<HabitDto>>(entity);
+                return habits;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(GetByUserId)} service:{nameof(HabitService)} exeption: {ex}");
                 throw;
             }
         }

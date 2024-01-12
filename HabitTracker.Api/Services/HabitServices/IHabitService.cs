@@ -5,5 +5,6 @@ namespace HabitTracker.Api.Services.HabitServices
     public interface IHabitService : IDbEntityServiceBase<HabitDto, HabitForCreationDto>
     {
         public ICollection<HabitDto> GetByListId(int listId);
+        public ICollection<HabitDto> GetByUserId(int userId);
     }
 }
