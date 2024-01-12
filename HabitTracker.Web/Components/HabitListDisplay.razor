@@ -1,4 +1,5 @@
-﻿<h3>@habitList.Name</h3>
+﻿@inject IHabitListService habitListService;
+<h3>@habitList.Name</h3>
 
 @if (habitList.Habits.Count == 0)
 {
@@ -18,13 +19,16 @@ else
 
     public HabitList habitList { get; set; }
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {
-        habitList = new HabitList();
-        habitList.Name = "To do in home";
-        habitList.Habits = new List<Habit>();
-        habitList.Habits.Add(new Habit() { Name="Clean floor" });
-        habitList.Habits.Add(new Habit() { Name = "Cook dinner" });
+        //habitList = await habitListService.GetHabitListById();
+        //if()
+        {
+            
+            habitList = new HabitList();
+            habitList.Name = "TODO";
+            habitList.Habits = new List<Habit>();
+        }
 
         base.OnInitialized();
     }

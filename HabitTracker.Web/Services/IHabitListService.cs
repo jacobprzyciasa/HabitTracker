@@ -7,5 +7,11 @@ namespace HabitTracker.Web.Services
     {
         [Post("/habitList")]
         public Task<HabitListDto> AddHabitList(HabitListForCreationDto habitList);
+        [Get("/habitList/{id}")]
+        public Task<HabitDto> GetHabitListById(int id);
+        [Get("/habitList/userId/{userId}")]
+        public Task<ICollection<UserDto>> GetHabitByUserId(int userId);
+        [Delete("/habitList")]
+        public Task DeleteHabitlist(HabitListDto habitListToDelete);
     }
 }
