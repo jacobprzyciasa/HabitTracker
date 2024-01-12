@@ -1,4 +1,7 @@
-﻿@page "/account"
+﻿@inject ILocalStorageService localStorageService;
+@inject ITokenService tokenService;
+@inject NavigationManager UriHelper
+@page "/account"
 
 <h3>@welcomeMessage @name</h3>
 
@@ -10,6 +13,7 @@
         {
             <p>Connected via Google</p>
         }
+    <button @onclick="Logout">Logout</button>
     </div>
 </div>
 
@@ -36,6 +40,7 @@
     </div>
 </div>
 
+
 @code {
     public string name { get; set; } // from database
     public string surname { get; set; } // from database
@@ -45,6 +50,14 @@
 
     public static DateTime date = DateTime.Now;
     public int hour = (int)date.Hour;
+
+    public void Logout()
+    {
+        localStorageService.RemoveItemAsync("userId");
+        tokenService.RemoveToken();
+        StateHasChanged();
+        UriHelper.NavigateTo("newUser");
+    }
 
     protected override async Task OnInitializedAsync()
     {

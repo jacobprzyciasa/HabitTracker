@@ -3,6 +3,8 @@
 @inject IUserService userService;
 @inject ITokenService tokenService;
 @inject ILocalStorageService localStorageService;
+@inject NavigationManager UriHelper
+@attribute [AllowAnonymous]
 
 <div>
 
@@ -36,6 +38,9 @@
 
         UserDto user = await userService.GetUserFromUsername(userAutentication.UserName);
         await localStorageService.SetItemAsync("userId", user.Id);
+
+        this.StateHasChanged();
+        UriHelper.NavigateTo("/");
 
         Console.WriteLine(token.AccessToken);
     }
