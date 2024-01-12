@@ -94,6 +94,23 @@ namespace HabitTracker.Api.Services.HabitListServices
             }
         }
 
+        public ICollection<HabitListDto> GetByUserId(int id)
+        {
+            try
+            {
+                var entity = _repositoryManager.HabitList.GetByUserId(id);
+                var habitList = _mapper.Map<ICollection<HabitListDto>>(entity);
+                return habitList;
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Something went wrong in the method:{nameof(GetByUserId)} service:{nameof(HabitListService)} exeption: {ex}");
+                throw;
+            }
+        }
+
+
         public HabitListDto Update(HabitListDto entity)
         {
             try
