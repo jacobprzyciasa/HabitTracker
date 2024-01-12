@@ -5,17 +5,19 @@
 @inject IMapper mapper;
 @inject IUserService userService;
 
-<h3>@habitList.Name</h3>
-
-@if (habitList.Habits.Count == 0)
+@if (!(habitList is null))
 {
-    <p>nic nie ma</p>
-}
-else
-{
-    foreach (Habit i in habitList.Habits)
+    <h3>@habitList.Name</h3>
+    @if (habitList.Habits.Count == 0)
     {
-        <HabitDisplay settings="@settings" habit="i"></HabitDisplay>
+        <p>nic nie ma</p>
+    }
+    else
+    {
+        foreach (Habit i in habitList.Habits)
+        {
+            <HabitDisplay settings="@settings" habit="i"></HabitDisplay>
+        }
     }
 }
 
@@ -39,12 +41,24 @@ else
             HabitList newHabitList = new();
             newHabitList.Name = "All";
             newHabitList.Habits = new List<Habit>();
+            newHabitList.UserHabitLists = new List<UserHabitList>();
+
+
             UserHabitList userHabitList = new();
-            //userHabitList.User = await 
+            userHabitList.User = mapper.Map<User>(await userService.GetUserById(userId));
+            userHabitList.Role = HabitRole.Owner;
+            newHabitList.UserHabitLists.Add(userHabitList);
+
+            HabitListDto dto = await habitListService.AddHabitList(mapper.Map<HabitListForCreationDto>(newHabitList));
+            Console.WriteLine(dto.Id);
+            habitList = mapper.Map<HabitList>(dto);
+            StateHasChanged();
         }
         else
         {
             habitList = mapper.Map<HabitList>(getHabitList.First());
+            Console.WriteLine(habitList.Id);
+            StateHasChanged();
         }
 
         base.OnInitialized();

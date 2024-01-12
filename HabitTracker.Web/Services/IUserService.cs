@@ -11,5 +11,7 @@ namespace HabitTracker.Web.Services
         public Task<TokenDto> LoginUser(UserForAuthenticationDto user);
         [Get("/users/{username}")]
         public Task<UserDto> GetUserFromUsername(string username);
+        [Get("/users/id/{id}")]
+        public Task<UserDto> GetUserById(int id);
     }
 }

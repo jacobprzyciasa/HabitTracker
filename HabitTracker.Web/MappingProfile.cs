@@ -15,12 +15,14 @@ namespace HabitTracker.Web
             CreateMap<HabitList, HabitListDto>();
             CreateMap<HabitListDto, HabitList>();
             CreateMap<HabitListForCreationDto, HabitList>();
+            CreateMap<HabitList, HabitListForCreationDto>();
 
             CreateMap<HabitCompleteStatus, HabitCompleteStatusDto>();
             CreateMap<HabitCompleteStatusDto, HabitCompleteStatus>();
             CreateMap<HabitCompleteStatusForCreationDto, HabitCompleteStatus>();
 
             CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
 
             CreateMap<UserForRegistrationDto, User>();
 
