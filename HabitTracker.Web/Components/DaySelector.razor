@@ -3,49 +3,49 @@
         <li @onclick="(() => DaySelect(1))">
             <p>MON</p>
             <div>
-                <p>1</p>
+                <p>@GetDay(0)</p>
             </div>
             <div class="current-day-indycator @classNames[1]"></div>
         </li>
         <li @onclick="(() => DaySelect(2))">
             <p>TUE</p>
             <div>
-                <p>1</p>
+                <p>@GetDay(1)</p>
             </div>
             <div class="current-day-indycator @classNames[2]"></div>
         </li>
         <li @onclick="(() => DaySelect(3))">
             <p>WED</p>
             <div>
-                <p>1</p>
+                <p>@GetDay(2)</p>
             </div>
             <div class="current-day-indycator @classNames[3]"></div>
         </li>
         <li @onclick="(() => DaySelect(4))">
             <p>THU</p>
             <div>
-                <p>1</p>
+                <p>@GetDay(3)</p>
             </div>
             <div class="current-day-indycator @classNames[4]"></div>
         </li>
         <li @onclick="(() => DaySelect(5))">
             <p>FRI</p>
             <div>
-                <p>1</p>
+                <p>@GetDay(4)</p>
             </div>
             <div class="current-day-indycator @classNames[5]"></div>
         </li>
         <li @onclick="(() => DaySelect(6))">
             <p>SAT</p>
             <div>
-                <p>1</p>
+                <p>@GetDay(5)</p>
             </div>
             <div class="current-day-indycator @classNames[6]"></div>
         </li>
         <li @onclick="(() => DaySelect(0))">
             <p>SUN</p>
             <div>
-                <p>1</p>
+                <p>@GetDay(6)</p>
             </div>
             <div class="current-day-indycator @classNames[0]"></div>
         </li>
@@ -54,14 +54,31 @@
 
 @code {
     public int dayOfWeek = (int)DateTime.Now.DayOfWeek;
-
+    public int today = DateTime.Today.Day;
     public string[] classNames = { "", "", "", "", "", "", "" };
+    [Parameter]
+    public bool currentWeek { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        classNames[dayOfWeek] = "today";
+        if (currentWeek)
+        {
+            classNames[dayOfWeek] = "today";
+            
+        }
     }
 
+    private int GetDay(int pos)
+    {
+        if (pos == dayOfWeek)
+        {
+            return today;   
+        }
+        else
+        {
+            return today - (dayOfWeek - pos);
+        }
+    }
 
     private void DaySelect(int id)
     {

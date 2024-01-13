@@ -23,7 +23,7 @@ h1 {
     padding: 20px 20px 0 20px;
     border-radius: 20px;
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     overflow-y: hidden;
     overflow-x: scroll;
     gap: 50px;
