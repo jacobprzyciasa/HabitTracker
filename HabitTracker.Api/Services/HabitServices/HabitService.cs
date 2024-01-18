@@ -4,6 +4,7 @@ using HabitTracker.Api.Services.HabitListServices;
 using HabitTracker.Api.Services.Logger;
 using HabitTracker.Shared.DataTransferObjects;
 using HabitTracker.Shared;
+using Microsoft.EntityFrameworkCore;
 
 namespace HabitTracker.Api.Services.HabitServices
 {
@@ -132,22 +133,30 @@ namespace HabitTracker.Api.Services.HabitServices
         {
             try
             {
-                var habit = _mapper.Map<Habit>(entity);
+                _repositoryManager.ClearTracks();
 
-                habit.HabitList = _repositoryManager.HabitList.GetById(habit.HabitList.Id);
-
-                List<HabitCompleteStatus> habitCompleteStatus = new List<HabitCompleteStatus>();
-                foreach (var i in habit.DailyCompleteStatus)
+                var oldHabit = _repositoryManager.Habit.GetById(entity.Id);
+                
+                foreach (var dcs in entity.DailyCompleteStatus) 
                 {
-                    var user = _repositoryManager.User.GetById(i.User.Id);
-                    habitCompleteStatus.Add(new() { User = user, Date = i.Date, Complete = i.Complete });
+                    var i = oldHabit.DailyCompleteStatus.Where(i => i.Id == dcs.Id).FirstOrDefault();
+                    if (i is not null)
+                    {
+                        i.Complete = dcs.Complete;
+                    }
+                    else
+                    {
+                        var idCopy = oldHabit.DailyCompleteStatus.Where(i => i.User.Id == dcs.User.Id).FirstOrDefault();
+                        if (idCopy is not null)
+                            dcs.User = idCopy.User;
+                        oldHabit.DailyCompleteStatus.Add(dcs);
+                    }
                 }
-                habit.DailyCompleteStatus = habitCompleteStatus;
 
-                _repositoryManager.Habit.Update(habit);
+                _repositoryManager.Habit.Update(oldHabit);
                 _repositoryManager.Save();
 
-                var habitToReturn = _mapper.Map<HabitDto>(habit);
+                var habitToReturn = _mapper.Map<HabitDto>(oldHabit);
                 return habitToReturn;
 
             }

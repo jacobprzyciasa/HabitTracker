@@ -1,6 +1,8 @@
 ﻿@inject IHabitService habitService
+@inject IUserService userService
 @inject IMapper mapper
 @inject NavigationManager NavManager
+@inject ILocalStorageService localStorageService
 
 
 <div class="habit-content @(settings ? "editable" : "")">
@@ -44,34 +46,63 @@
 
     public string editMenu = "nonedit";
 
+
+
     async Task ChangeHabitDoneStatus()
     {
-        HabitCompleteStatus todayStatus = habit.DailyCompleteStatus.Where(c => c.Date == DateOnly.FromDateTime(DateTime.Now)).FirstOrDefault()!;
+        DateOnly date = await localStorageService.GetItemAsync<DateOnly>("day");
+        HabitCompleteStatus todayStatus = habit.DailyCompleteStatus.Where(c => c.Date == date).FirstOrDefault()!;
         if (todayStatus is null)
-            AddHabitCompleteStatus(DateOnly.FromDateTime(DateTime.Now));
+            await AddHabitCompleteStatus(date);
+        else
 
-        if (doneClass == "complete")
+        if (todayStatus.Complete)
         {
             doneClass = "failed";
-
+            habit.DailyCompleteStatus.Where(c => c.Date == date).First().Complete = false;
+            UpdateHabit();
         }
         else
         {
             doneClass = "complete";
-
+            habit.DailyCompleteStatus.Where(c => c.Date == date).First().Complete = true;
+            UpdateHabit();
         }
     }
 
 
     async Task AddHabitCompleteStatus(DateOnly date)
     {
-        
+        int userId = await localStorageService.GetItemAsync<int>("userId");
+        User user = mapper.Map<User>(await userService.GetUserById(userId));
+
+        HabitCompleteStatus newHabitCompleteStatus = new()
+            {
+                User = user,
+                Date = date,
+                Complete = true
+            };
+
+        habit.DailyCompleteStatus = new List<HabitCompleteStatus>(habit.DailyCompleteStatus);
+        habit.DailyCompleteStatus.Add(newHabitCompleteStatus);
+        await UpdateHabit();
+
+    }
+
+    async Task UpdateHabit()
+    {
+        habit.HabitList.Habits = new List<Habit>();
+        HabitDto newHabitDto = await habitService.UpdateHabit(mapper.Map<HabitDto>(habit));
+        habit = mapper.Map<Habit>(newHabitDto);
+        StateHasChanged();
+        await OnInitializedAsync();
     }
 
 
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
-        HabitCompleteStatus todayStatus = habit.DailyCompleteStatus.Where(c => c.Date == DateOnly.FromDateTime(DateTime.Now)).FirstOrDefault()!;
+        DateOnly date = await localStorageService.GetItemAsync<DateOnly>("day");
+        HabitCompleteStatus todayStatus = habit.DailyCompleteStatus.Where(c => c.Date == date).FirstOrDefault()!;
         if (todayStatus is null)
             doneClass = "";
         else if (todayStatus.Complete)

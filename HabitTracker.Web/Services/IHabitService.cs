@@ -11,5 +11,8 @@ namespace HabitTracker.Web.Services
 
         [Delete("/habit")]
         public Task DeleteHabit([Body] HabitDto habit);
+
+        [Put("/habit")]
+        public Task<HabitDto> UpdateHabit(HabitDto habit);
     }
 }

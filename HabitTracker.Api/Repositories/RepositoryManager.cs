@@ -30,7 +30,7 @@ namespace HabitTracker.Api.Repositories
         public IHabitRepository Habit => _habitRepository.Value;
         public IUserRepository User => _userRepository.Value;
 
-
+        public void ClearTracks() => _dbContext.ChangeTracker.Clear();
         public void Save() => _dbContext.SaveChanges();
     }
 }

@@ -89,6 +89,29 @@ namespace HabitTracker.Api.Controllers
             }
         }
 
+
+        [HttpPut]
+        public async Task<IActionResult> Update(HabitDto entity)
+        {
+            try
+            {
+                if (entity == null)
+                    return BadRequest();
+
+                var result = _services.HabitService.Update(entity);
+
+                if (result == null)
+                    return NotFound();
+
+
+                return Ok(result);
+            }
+            catch
+            {
+                return StatusCode(500, "Internal server error");
+            }
+        }
+
         [HttpDelete]
         public async Task<IActionResult> Delete(HabitDto entity)
         {

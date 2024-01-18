@@ -1,48 +1,51 @@
-﻿<div class="calendar-div">
+﻿@inject ILocalStorageService localStorageService;
+
+
+<div class="calendar-div">
     <ul>
-        <li @onclick="(() => DaySelect(1))">
+        <li @onclick="(() => DaySelect(1, 0))">
             <p>MON</p>
             <div>
                 <p>@GetDay(0)</p>
             </div>
             <div class="current-day-indycator @classNames[1]"></div>
         </li>
-        <li @onclick="(() => DaySelect(2))">
+        <li @onclick="(() => DaySelect(2,1))">
             <p>TUE</p>
             <div>
                 <p>@GetDay(1)</p>
             </div>
             <div class="current-day-indycator @classNames[2]"></div>
         </li>
-        <li @onclick="(() => DaySelect(3))">
+        <li @onclick="(() => DaySelect(3,2))">
             <p>WED</p>
             <div>
                 <p>@GetDay(2)</p>
             </div>
             <div class="current-day-indycator @classNames[3]"></div>
         </li>
-        <li @onclick="(() => DaySelect(4))">
+        <li @onclick="(() => DaySelect(4,3))">
             <p>THU</p>
             <div>
                 <p>@GetDay(3)</p>
             </div>
             <div class="current-day-indycator @classNames[4]"></div>
         </li>
-        <li @onclick="(() => DaySelect(5))">
+        <li @onclick="(() => DaySelect(5,4))">
             <p>FRI</p>
             <div>
                 <p>@GetDay(4)</p>
             </div>
             <div class="current-day-indycator @classNames[5]"></div>
         </li>
-        <li @onclick="(() => DaySelect(6))">
+        <li @onclick="(() => DaySelect(6,5))">
             <p>SAT</p>
             <div>
                 <p>@GetDay(5)</p>
             </div>
             <div class="current-day-indycator @classNames[6]"></div>
         </li>
-        <li @onclick="(() => DaySelect(0))">
+        <li @onclick="(() => DaySelect(0,6))">
             <p>SUN</p>
             <div>
                 <p>@GetDay(6)</p>
@@ -59,13 +62,17 @@
     [Parameter]
     public bool currentWeek { get; set; }
 
+    [Parameter]
+    public EventCallback Refresh { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         if (currentWeek)
         {
-            classNames[dayOfWeek] = "today";
-            
+            classNames[dayOfWeek + 1] = "today"; 
         }
+
+        await localStorageService.SetItemAsync<DateOnly>("day", DateOnly.FromDateTime(DateTime.Today));
     }
 
     private int GetDay(int pos)
@@ -80,7 +87,7 @@
         }
     }
 
-    private void DaySelect(int id)
+    private async Task DaySelect(int id, int pos)
     {
         for (int i = 0; i < 7; i++)
         {
@@ -88,5 +95,11 @@
         }
 
         classNames[id] = "today";
+
+
+        var todayDate = DateOnly.FromDateTime(DateTime.Now);
+
+        await localStorageService.SetItemAsync<DateOnly>("day", todayDate.AddDays((dayOfWeek - pos)*(-1)));
+
     }
 }

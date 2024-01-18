@@ -1,4 +1,5 @@
-﻿using HabitTracker.Shared;
+﻿using HabitTracker.Api.Entities;
+using HabitTracker.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace HabitTracker.Api
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseInMemoryDatabase("habit_tracker");
+            optionsBuilder.EnableSensitiveDataLogging();
             base.OnConfiguring(optionsBuilder);
         }
 
@@ -22,7 +24,8 @@ namespace HabitTracker.Api
             base.OnModelCreating(builder);
 
             builder.Entity<HabitList>().HasMany(hl => hl.UserHabitLists);
-            builder.Entity<Habit>().HasMany(h => h.DailyCompleteStatus);
+            builder.Entity<HabitCompleteStatus>().Property(hcs => hcs.Date).HasConversion<DateOnlyConverter, DateOnlyComparer>();
+
         }
 
 

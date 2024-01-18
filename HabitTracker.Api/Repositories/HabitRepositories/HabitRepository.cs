@@ -1,6 +1,7 @@
 ﻿using HabitTracker.Api.Repositories.HabitRepositories;
 using HabitTracker.Shared;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace HabitTracker.Api.Repositories.HabitRepsitories
 {
@@ -15,12 +16,18 @@ namespace HabitTracker.Api.Repositories.HabitRepsitories
         public override IEnumerable<Habit> GetAll()
         {
             return _dbcontext.Set<Habit>()
-                .Include(h => h.DailyCompleteStatus);
+                .Include(h => h.HabitList)
+                .ThenInclude(hl => hl.UserHabitLists)
+                .Include(h => h.DailyCompleteStatus)
+                .ThenInclude(hcs => hcs.User);
         }
         public override Habit GetById(int id)
         {
             return _dbcontext.Set<Habit>()
+                .Include(h => h.HabitList)
+                .ThenInclude(hl => hl.UserHabitLists)
                 .Include(h => h.DailyCompleteStatus)
+                .ThenInclude(hcs => hcs.User)
                 .FirstOrDefault(h => h.Id == id)!;
         }
 
@@ -29,6 +36,10 @@ namespace HabitTracker.Api.Repositories.HabitRepsitories
             return _dbcontext.Set<Habit>()
                 .Where(h => h.HabitList.UserHabitLists
                 .Any(uhl => uhl.User.Id == userId))
+                .Include(h => h.HabitList)
+                .ThenInclude(hl => hl.UserHabitLists)
+                .Include(h => h.DailyCompleteStatus)
+                .ThenInclude(hcs => hcs.User)
                 .ToList();
         }
 
@@ -36,7 +47,13 @@ namespace HabitTracker.Api.Repositories.HabitRepsitories
         {
             return _dbcontext.Set<Habit>()
                 .Where(h => h.HabitList.Id == listId)
+                .Include(h => h.HabitList)
+                .ThenInclude(hl => hl.UserHabitLists)
+                .Include(h => h.DailyCompleteStatus)
+                .ThenInclude(hcs => hcs.User)
                 .ToList();
         }
+
+
     }
 }

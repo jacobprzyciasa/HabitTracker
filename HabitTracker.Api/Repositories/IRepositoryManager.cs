@@ -12,6 +12,8 @@ namespace HabitTracker.Api.Repositories
         IHabitRepository Habit { get; }
         IUserRepository User { get; }
 
+        void ClearTracks();
+
         void Save();
     }
 }
