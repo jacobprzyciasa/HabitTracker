@@ -39,7 +39,7 @@
         UserDto user = await userService.GetUserFromUsername(userAutentication.UserName);
         await localStorageService.SetItemAsync("userId", user.Id);
 
-        this.StateHasChanged();
+        StateHasChanged();
         UriHelper.NavigateTo("/");
 
         Console.WriteLine(token.AccessToken);

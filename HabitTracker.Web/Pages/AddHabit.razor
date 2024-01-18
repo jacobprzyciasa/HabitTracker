@@ -1,19 +1,52 @@
 ﻿@page "/add"
-
 @inject NavigationManager NavManager
-@attribute [Authorize]
+@inject IHabitListService habitListService
+@inject IMapper mapper
+@inject ILocalStorageService localStogareService
+@inject IHabitService habitService
+
 <div class="add-habit">
     <img @onclick="CloseForm" src="images/x.svg" />
     <h3>AddHabit</h3>
 
     <div class="add-habit-content">
-
+        <form onsubmit="@Submit">
+            <input type="text" @bind-value="name" />
+            <input type="text" @bind-value="description" />
+            <button type="submit">Add</button>
+        </form>
     </div>
 
 </div>
 @code {
+    string name;
+    string description;
+
+
+    public async void Submit()
+    {
+        HabitForCreationDto habitForCreation = new(name, description, await GetUserMainHabitList(), new List<HabitCompleteStatus>());
+        Console.WriteLine("x");
+        Console.WriteLine(habitForCreation);
+        HabitDto responseHabit = await habitService.AddHabit(habitForCreation);
+        if (responseHabit is not null)
+        {
+            NavManager.NavigateTo("/");
+        }
+
+
+    }
+
+
     private void CloseForm()
     {
         NavManager.NavigateTo("/");
+    }
+
+    private async Task<HabitList> GetUserMainHabitList()
+    {
+        int userId = await localStogareService.GetItemAsync<int>("userId");
+        List<HabitListDto> habitListDto = await habitListService.GetHabitListByUserId(userId);
+        return mapper.Map<HabitList>(habitListDto.First());
     }
 }

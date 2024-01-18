@@ -56,7 +56,7 @@
         localStorageService.RemoveItemAsync("userId");
         tokenService.RemoveToken();
         StateHasChanged();
-        UriHelper.NavigateTo("newUser");
+        UriHelper.NavigateTo("Welcome");
     }
 
     protected override async Task OnInitializedAsync()

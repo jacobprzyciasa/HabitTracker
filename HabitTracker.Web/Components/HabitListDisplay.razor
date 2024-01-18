@@ -1,9 +1,9 @@
-﻿@using Blazored.LocalStorage;
-@using HabitTracker.Shared.DataTransferObjects;
-@inject IHabitListService habitListService;
-@inject ILocalStorageService localStogareService;
-@inject IMapper mapper;
-@inject IUserService userService;
+﻿@using Blazored.LocalStorage
+@using HabitTracker.Shared.DataTransferObjects
+@inject IHabitListService habitListService
+@inject ILocalStorageService localStogareService
+@inject IMapper mapper
+@inject IUserService userService
 
 @if (!(habitList is null))
 {
@@ -21,22 +21,22 @@
     }
 }
 
-@code {
+<button @onclick="Refresh">Ref</button>
+
+@code{
+
     [Parameter]
     public bool settings { get; set; }
 
     public HabitList habitList { get; set; }
 
-    protected override async void OnInitialized()
+
+    public async void Refresh()
     {
         int userId = await localStogareService.GetItemAsync<int>("userId");
         List<HabitListDto> getHabitList = await habitListService.GetHabitListByUserId(userId);
-        if(getHabitList.Count == 0)
+        if (getHabitList.Count == 0)
         {
-            //create new list
-            //habitList = new HabitList();
-            //habitList.Name = "TODO";
-            //habitList.Habits = new List<Habit>();
 
             HabitList newHabitList = new();
             newHabitList.Name = "All";
@@ -62,5 +62,10 @@
         }
 
         base.OnInitialized();
+    }
+
+    protected override async void OnInitialized()
+    {
+        Refresh();
     }
 }
