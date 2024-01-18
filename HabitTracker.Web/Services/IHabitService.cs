@@ -8,5 +8,8 @@ namespace HabitTracker.Web.Services
     {
         [Post("/habit")]
         public Task<HabitDto> AddHabit(HabitForCreationDto habit);
+
+        [Delete("/habit")]
+        public Task DeleteHabit([Body] HabitDto habit);
     }
 }

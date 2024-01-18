@@ -15,23 +15,31 @@
             <input type="text" @bind-value="description" />
             <button type="submit">Add</button>
         </form>
+        <p>@message</p>
     </div>
 
 </div>
 @code {
     string name;
     string description;
-
+    string message = "";
 
     public async void Submit()
     {
-        HabitForCreationDto habitForCreation = new(name, description, await GetUserMainHabitList(), new List<HabitCompleteStatus>());
-        Console.WriteLine("x");
-        Console.WriteLine(habitForCreation);
-        HabitDto responseHabit = await habitService.AddHabit(habitForCreation);
-        if (responseHabit is not null)
+        if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(description))
         {
-            NavManager.NavigateTo("/");
+            HabitList habitList = await GetUserMainHabitList();
+            habitList.Habits = new List<Habit>();
+            HabitForCreationDto habitForCreation = new(name, description, habitList, new List<HabitCompleteStatus>());
+            HabitDto responseHabit = await habitService.AddHabit(habitForCreation);
+            if (responseHabit is not null)
+            {
+                NavManager.NavigateTo("/");
+            }
+        }
+        else
+        {
+            message = "fill both inputs";
         }
 
 

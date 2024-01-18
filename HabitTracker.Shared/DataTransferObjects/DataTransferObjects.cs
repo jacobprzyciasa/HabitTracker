@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HabitTracker.Shared.DataTransferObjects
 {
-    public record HabitDto(int Id, string Name, string Description, HabitList HabitList,[AllowNull] ICollection<HabitCompleteStatus> DailyCompleteStatus);
+    public record HabitDto(int Id, string Name, string Description, [AllowNull] HabitList HabitList,[AllowNull] ICollection<HabitCompleteStatus> DailyCompleteStatus);
     public record HabitForCreationDto(string Name, string Description, HabitList HabitList, [AllowNull] ICollection<HabitCompleteStatus> DailyCompleteStatus);
     
     public record HabitCompleteStatusDto(int Id, User user, DateOnly Date, bool Complete);

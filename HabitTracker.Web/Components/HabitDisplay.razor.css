@@ -50,6 +50,16 @@ img {
     transition: 0.2s;
 }
 
+.nonedit .habit-edit-hidden {
+    display:none;
+}
+
+.habit-edit-hidden {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .editable:nth-child(odd) {
     animation: edit_habits_odd .3s infinite;
@@ -61,16 +71,52 @@ img {
 
 @keyframes edit_habits_odd{
     0%{transform: rotate(0deg);}
-    25%{transform: rotate(0.4deg);}
+    25%{transform: rotate(0.2deg);}
     50%{transform: rotate(0deg);}
-    75%{transform: rotate(-0.4deg);}
+    75%{transform: rotate(-0.2deg);}
     100%{transform: rotate(0deg);}
 }
 
 @keyframes edit_habits_even{
     0%{transform: rotate(0deg);}
-    25%{transform: rotate(-0.4deg);}
+    25%{transform: rotate(-0.2deg);}
     50%{transform: rotate(0deg);}
-    75%{transform: rotate(0.4deg);}
+    75%{transform: rotate(0.2deg);}
     100%{transform: rotate(0deg);}
+}
+
+
+
+.delete {
+    border: none;
+    border-radius: 15px;
+    width: 80%;
+    height: 25px !important;
+    margin-top: 10px;
+
+    background-color: #f93e3e;
+    text: white;
+}
+
+
+
+
+.habit-check {
+    border: none;
+    width: 35px !important;
+    height: 35px !important;
+    border-radius: 50px;
+    background-color: lightgray;
+}
+
+.habit-check:hover {
+    cursor:pointer;
+}
+
+.habit-check.complete {
+    background-color: lightgreen;
+}
+
+.habit-check.failed {
+    background-color: lightcoral;
 }

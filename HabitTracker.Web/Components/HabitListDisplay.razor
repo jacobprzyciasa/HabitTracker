@@ -10,18 +10,18 @@
     <h3>@habitList.Name</h3>
     @if (habitList.Habits.Count == 0)
     {
-        <p>nic nie ma</p>
+        <p>you have no habits click: "Add"</p>
     }
     else
     {
         foreach (Habit i in habitList.Habits)
         {
-            <HabitDisplay settings="@settings" habit="i"></HabitDisplay>
+            <HabitDisplay settings="@settings" habit="i" Refresh="Refresh"></HabitDisplay>
         }
     }
 }
 
-<button @onclick="Refresh">Ref</button>
+@* <button @onclick="Refresh">Ref</button> *@
 
 @code{
 
@@ -30,8 +30,7 @@
 
     public HabitList habitList { get; set; }
 
-
-    public async void Refresh()
+    public async Task Refresh()
     {
         int userId = await localStogareService.GetItemAsync<int>("userId");
         List<HabitListDto> getHabitList = await habitListService.GetHabitListByUserId(userId);

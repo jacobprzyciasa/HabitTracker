@@ -1,4 +1,9 @@
-﻿<div class="habit-content @(settings ? "editable" : "")">
+﻿@inject IHabitService habitService
+@inject IMapper mapper
+@inject NavigationManager NavManager
+
+
+<div class="habit-content @(settings ? "editable" : "")">
     <div class="habit-content-main">
 
         <div class="img-and-description">
@@ -7,13 +12,20 @@
             <h2>@habit.Name</h2>
         </div>
 
+        <button class="habit-check @doneClass" @onclick="ChangeHabitDoneStatus">
+            @* done/not done *@
+        </button>
+
         @if (settings)
         {
             <img src="/images/menu-outline.svg" class="toggle" @onclick="EditHabit"/>
         }
     </div>
     <div class="habit-content-settings @editMenu">
-        
+        <div class="habit-edit-hidden">
+
+            <button @onclick="@(() => { DeleteHabit(); Refresh.InvokeAsync(); })" class="delete">delete</button>
+        </div>
     </div>
 </div>
 
@@ -25,12 +37,59 @@
     [Parameter]
     public Habit habit { get; set; }
 
+    [Parameter]
+    public EventCallback Refresh { get; set; }
+
+    public string doneClass = "";
+
     public string editMenu = "nonedit";
 
-    protected override async Task OnInitializedAsync()
+    async Task ChangeHabitDoneStatus()
     {
-        imageSrc = "/images/person-outline.svg";
+        HabitCompleteStatus todayStatus = habit.DailyCompleteStatus.Where(c => c.Date == DateOnly.FromDateTime(DateTime.Now)).FirstOrDefault()!;
+        if (todayStatus is null)
+            AddHabitCompleteStatus(DateOnly.FromDateTime(DateTime.Now));
+
+        if (doneClass == "complete")
+        {
+            doneClass = "failed";
+
+        }
+        else
+        {
+            doneClass = "complete";
+
+        }
     }
+
+
+    async Task AddHabitCompleteStatus(DateOnly date)
+    {
+        
+    }
+
+
+    protected override void OnInitialized()
+    {
+        HabitCompleteStatus todayStatus = habit.DailyCompleteStatus.Where(c => c.Date == DateOnly.FromDateTime(DateTime.Now)).FirstOrDefault()!;
+        if (todayStatus is null)
+            doneClass = "";
+        else if (todayStatus.Complete)
+            doneClass = "complete";
+        else
+            doneClass = "failed";        base.OnInitialized();
+    }
+
+
+    public async Task DeleteHabit()
+    {
+        habit.HabitList.Habits = new List<Habit>();
+        HabitDto habitToDelete = mapper.Map<HabitDto>(habit);
+        await habitService.DeleteHabit(habitToDelete);
+        await Refresh.InvokeAsync();
+        StateHasChanged();
+    }
+
 
     public void EditHabit()
     {
