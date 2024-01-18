@@ -5,18 +5,14 @@
 @inject ILocalStorageService localStorageService
 
 
-<div class="habit-content @(settings ? "editable" : "")">
+<div class="habit-content @(settings ? "editable" : "")" style="text-decoration: @textDecoration;">
     <div class="habit-content-main">
 
         <div class="img-and-description">
 
             <img src="@imageSrc" class="habit-prof-img"/>
-            <h2>@habit.Name</h2>
+            <h2 @onclick="Cross">@habit.Name</h2>
         </div>
-
-        <button class="habit-check @doneClass" @onclick="ChangeHabitDoneStatus">
-            @* done/not done *@
-        </button>
 
         @if (settings)
         {
@@ -46,7 +42,7 @@
 
     public string editMenu = "nonedit";
 
-
+    public string textDecoration = "none";
 
     async Task ChangeHabitDoneStatus()
     {
@@ -131,6 +127,19 @@
         else
         {
             editMenu = "nonedit";
+        }
+    }
+
+    public void Cross()
+    {
+        if (textDecoration == "none")
+        {
+            textDecoration = "line-through";
+
+        }
+        else
+        {
+            textDecoration = "none";
         }
     }
 

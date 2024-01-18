@@ -3,15 +3,15 @@
 @inject IHabitListService habitListService;
 @attribute [AllowAnonymous]
 
-<div>
+<div class="register-form">
 
     <h3>Register</h3>
 
     <form onsubmit="@Submit">
-        <input type="text" @bind-value="UserName" />
-        <input type="email" @bind-value="Email" />
-        <input type="password" @bind-value="Password" />
-        <input type="password" @bind-value="PasswordRepeat" />
+        <input type="text" @bind-value="UserName" placeholder="username" />
+        <input type="email" @bind-value="Email" placeholder="email" />
+        <input type="password" @bind-value="Password" placeholder="password" />
+        <input type="password" @bind-value="PasswordRepeat" placeholder="repeat password" />
         <p class="error @appearance">Password does not match</p>
         <button type="submit">Register</button>
     </form>
@@ -23,7 +23,7 @@
     public string Password;
     public string PasswordRepeat;
     public string Email;
-    public string appearance;
+    public string appearance = "hide";
 
 
     private async void Submit()

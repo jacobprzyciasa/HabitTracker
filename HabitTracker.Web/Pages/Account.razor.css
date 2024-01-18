@@ -27,6 +27,19 @@ h5 {
     margin-left: 40px;
 }
 
+.logout {
+    margin-top: 15px;
+    background-color: black;
+    color: #FFF;
+    font-weight: 300;
+    border: 0;
+    width: 80px;
+    height: 20px;
+    border-radius: 20px;
+    font-size: .6em;
+    font-weight: 600;
+}
+
 .basic-info {
     display: flex;
     flex-direction: row;

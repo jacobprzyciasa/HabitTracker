@@ -6,15 +6,15 @@
 @inject NavigationManager UriHelper
 @attribute [AllowAnonymous]
 
-<div>
+<div class="login-form">
 
     <h3>Login</h3>
 
     <form onsubmit="@Submit">
-        <input type="text" @bind-value="UserName" />
-        <input type="password" @bind-value="Password" />
+        <input type="text" @bind-value="UserName" placeholder="username" />
+        <input type="password" @bind-value="Password" placeholder="password" />
         <p class="error @appearance">Incorrect password or username</p>
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
     </form>
 
 </div>
@@ -22,7 +22,7 @@
 @code {
     public string UserName;
     public string Password;
-    public string appearance;
+    public string appearance = "hide";
 
     private async void Submit()
     {
