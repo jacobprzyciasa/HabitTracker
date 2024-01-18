@@ -7,18 +7,24 @@
 
 <div class="add-habit">
     <img @onclick="CloseForm" src="images/x.svg" />
-    <h3>AddHabit</h3>
 
-    <div class="add-habit-content">
-        <form onsubmit="@Submit">
-            <input type="text" @bind-value="name" />
-            <input type="text" @bind-value="description" />
-            <button type="submit">Add</button>
-        </form>
-        <p>@message</p>
+    <div class="add-habit-form">
+
+        <h3>AddHabit</h3>
+
+        <div class="add-habit-content">
+            <form onsubmit="@Submit">
+                <input type="text" @bind-value="name" placeholder="title" />
+                <input type="text" @bind-value="description" placeholder="description" />
+                <button type="submit">Add</button>
+            </form>
+            <p>@message</p>
+        </div>
     </div>
 
 </div>
+
+
 @code {
     string name;
     string description;

@@ -3,7 +3,8 @@
 
 h2 {
     font-size: 1.2em;
-    margin-left: 40px
+    margin-left: 40px;
+    width: 50vw;
 }
 
 img {
@@ -62,40 +63,41 @@ img {
 
 
 .editable:nth-child(odd) {
-    animation: edit_habits_odd .3s infinite;
+    animation: edit_habits_odd .9s infinite;
 }
 
 .editable:nth-child(even) {
-    animation: edit_habits_even .3s infinite;
+    animation: edit_habits_even .9s infinite;
 }
 
 @keyframes edit_habits_odd{
     0%{transform: rotate(0deg);}
-    25%{transform: rotate(0.2deg);}
+    25%{transform: rotate(0.1deg);}
     50%{transform: rotate(0deg);}
-    75%{transform: rotate(-0.2deg);}
+    75%{transform: rotate(-0.1deg);}
     100%{transform: rotate(0deg);}
 }
 
 @keyframes edit_habits_even{
     0%{transform: rotate(0deg);}
-    25%{transform: rotate(-0.2deg);}
+    25%{transform: rotate(-0.1deg);}
     50%{transform: rotate(0deg);}
-    75%{transform: rotate(0.2deg);}
+    75%{transform: rotate(0.1deg);}
     100%{transform: rotate(0deg);}
 }
 
 
 
 .delete {
-    border: none;
-    border-radius: 15px;
-    width: 80%;
-    height: 25px !important;
-    margin-top: 10px;
-
-    background-color: #f93e3e;
-    text: white;
+    margin-top: 30px;
+    background-color: red;
+    color: #FFF;
+    font-weight: 300;
+    border: 0;
+    width: 50vw;
+    height: 35px;
+    border-radius: 20px;
+    font-weight: 800;
 }
 
 

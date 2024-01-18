@@ -2,9 +2,44 @@
 @attribute [AllowAnonymous]
 @layout WelcomPageLayout
 
-<RegisterForm></RegisterForm>
-<LoginForm></LoginForm>
+<div class="main-content">
+    <h1>Log in and track your habits</h1>
+    <div class="forms">
+
+        <div style="display: @display2;">
+
+            <LoginForm></LoginForm>
+        </div>
+        
+        <div style="display: @display;">
+
+            <RegisterForm></RegisterForm>
+        </div>
+        <button class="register-button" @onclick="(ShowRegister)">
+            @message
+        </button>
+    </div>
+</div>
 
 @code {
+    public string display = "none";
+    public string display2 = "block";
+    public string message = "Register";
 
+
+    public void ShowRegister()
+    {
+        if(display == "none")
+        {
+            display = "block";
+            display2 = "none";
+            message = "Login";
+        }
+        else
+        {
+            display = "none";
+            display2 = "block";
+            message = "Regiser";
+        }
+    }
 }
